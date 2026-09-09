@@ -60,11 +60,7 @@ anything_you_want = "root-level task kept out of tasks/ for quick access"
 [tasks.menu]
 description = "List task categories and how to filter tasks by one (project help)"
 alias = "h"
-run = '''
-echo "Categories: ai, dev, docker, network, omarchy, root, system"
-echo "See tasks in a category: mise cat <category>   (e.g. mise cat system)"
-echo "See every task:          mise tasks ls"
-'''
+file = "scripts/bash/menu.sh"
 
 [_.tasks.menu]
 icon = "help-circle"
