@@ -17,18 +17,6 @@ requires_sudo = false
 interactive = false
 cwd_scope = "project"
 
-[_.tasks."dev:blueprint:manifest"]
-icon = "check"
-risk = "low"
-enabled = true
-tags = ["dev", "blueprint", "manifest"]
-category = "dev"
-destructive = false
-requires_confirm = false
-requires_sudo = false
-interactive = false
-cwd_scope = "project"
-
 [_.tasks."dev:blueprint:ci"]
 icon = "check"
 risk = "low"

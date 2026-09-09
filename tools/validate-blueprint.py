@@ -14,14 +14,9 @@ Three layers:
 
 Usage:
     python tools/validate-blueprint.py
-    python tools/validate-blueprint.py --write-manifest
-    python tools/validate-blueprint.py --check-manifest
 """
 from __future__ import annotations
 
-import argparse
-import collections
-import json
 import re
 import shutil
 import subprocess
@@ -287,7 +282,7 @@ else:
     notes.append("node not installed -- .mjs scripts were not syntax-checked")
 
 # ---------------------------------------------------------------------------
-# 5. Manifest
+# 5. Reporting helpers
 # ---------------------------------------------------------------------------
 def declared_args(name: str) -> bool:
     cfg = tasks[name]
@@ -298,51 +293,6 @@ def declared_args(name: str) -> bool:
         return script.exists() and "#USAGE" in script.read_text()
     return False
 
-
-def build_manifest() -> dict:
-    # Deterministic on purpose: no timestamp, so --check-manifest is stable and
-    # the file does not churn on every run.
-    return {
-        "schema_version": 1,
-        "project": "mise-task-blueprint",
-        "purpose": "generic reusable mise task/project reference pattern",
-        "generated_by": "tools/validate-blueprint.py --write-manifest",
-        "task_directory": "tasks",
-        "custom_metadata_pattern": "[_.tasks.<task>]",
-        "metadata_schema": "schemas/task-metadata.schema.json",
-        "catalog_schema": "schemas/catalog.schema.json",
-        "task_count": len(tasks),
-        "metadata_entry_count": len(meta),
-        "categories": dict(sorted(collections.Counter(
-            (n.split(":")[0] if ":" in n else "root") for n in tasks).items())),
-        "tasks_with_declared_args": sum(1 for n in tasks if declared_args(n)),
-        "destructive_task_count": sum(1 for m in meta.values() if m.get("destructive")),
-        "confirm_gated_task_count": sum(1 for m in meta.values() if m.get("requires_confirm")),
-        "caller_scoped_task_count": sum(1 for m in meta.values()
-                                        if m.get("cwd_scope") == "caller"),
-    }
-
-
-parser = argparse.ArgumentParser()
-group = parser.add_mutually_exclusive_group()
-group.add_argument("--write-manifest", action="store_true",
-                   help="regenerate MANIFEST.json")
-group.add_argument("--check-manifest", action="store_true",
-                   help="fail if MANIFEST.json is stale (for CI)")
-args = parser.parse_args()
-
-MANIFEST = ROOT / "MANIFEST.json"
-
-if not errors and (args.write_manifest or args.check_manifest):
-    expected = json.dumps(build_manifest(), indent=2) + "\n"
-    if args.write_manifest:
-        MANIFEST.write_text(expected)
-        print(f"\nWROTE {rel(MANIFEST)}")
-    else:
-        actual = MANIFEST.read_text() if MANIFEST.exists() else ""
-        if actual != expected:
-            err("MANIFEST.json is stale -- run: "
-                "python tools/validate-blueprint.py --write-manifest")
 
 # ---------------------------------------------------------------------------
 # Report

@@ -37,11 +37,9 @@ Machine-readability rules (these are what make a UI possible):
 Validate every change:
 
 18. Run `mise run dev:blueprint:validate`.
-19. Run `mise run dev:blueprint:manifest` if the task set changed, so
-    `MANIFEST.json` stays accurate. It is generated — never hand-edit it.
-20. When mise is present, run `mise tasks validate` and `mise tasks ls`.
-21. Before finishing, `mise run dev:blueprint:ci` runs the full CI gate.
+19. When mise is present, run `mise tasks validate` and `mise tasks ls`.
+20. Before finishing, `mise run dev:blueprint:ci` runs the full CI gate.
 
 Scope:
 
-22. Do not add plugin/UI code to this blueprint.
+21. Do not add plugin/UI code to this blueprint.

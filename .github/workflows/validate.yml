@@ -30,8 +30,7 @@ jobs:
           cache: true
 
       - name: Task and metadata gate
-        # mise tasks validate + full schema/invariant validation + a check that
-        # MANIFEST.json still matches the catalog.
+        # mise tasks validate + full metadata schema and invariant validation.
         run: mise run dev:blueprint:ci
 
       - name: Catalog schema conformance

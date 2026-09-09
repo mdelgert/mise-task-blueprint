@@ -161,14 +161,12 @@ Use system package management for system-integrated applications such as desktop
 
 ```bash
 mise run dev:blueprint:validate    # syntax, metadata schema, invariants
-mise run dev:blueprint:manifest    # refresh MANIFEST.json if the task set changed
 mise tasks validate
 mise tasks ls
 mise tasks info category:new-task
 ```
 
-`mise run dev:blueprint:ci` runs the whole gate the way CI does. `MANIFEST.json`
-is generated -- never hand-edit it.
+`mise run dev:blueprint:ci` runs the whole gate the way CI does.
 
 
 ## Important: `file` path resolution in included TOML

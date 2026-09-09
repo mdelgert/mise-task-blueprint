@@ -219,7 +219,7 @@ The included validator checks:
 - referenced script existence (resolved from the project root)
 - Bash syntax, plus shellcheck when installed
 - Python and Node syntax
-- `MANIFEST.json` freshness
+- task-scoped `tools` pinned to a version rather than `"latest"`
 
 Run:
 

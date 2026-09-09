@@ -148,7 +148,6 @@ After every task change:
 
 ```bash
 mise run dev:blueprint:validate    # syntax, metadata schema, invariants
-mise run dev:blueprint:manifest    # refresh MANIFEST.json if counts changed
 mise tasks validate
 mise tasks ls
 mise tasks info <task>

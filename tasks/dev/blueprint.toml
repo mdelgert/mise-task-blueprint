@@ -3,19 +3,13 @@ description = "Validate task syntax, metadata schema and task-to-metadata invari
 tools = { python = "3.14" }
 run = "python tools/validate-blueprint.py"
 
-["dev:blueprint:manifest"]
-description = "Regenerate MANIFEST.json from the live task catalog"
-tools = { python = "3.14" }
-run = "python tools/validate-blueprint.py --write-manifest"
-
-# The gate CI runs. `--check-manifest` performs the full validation and then
-# additionally fails if MANIFEST.json no longer matches the catalog.
+# The gate CI runs.
 ["dev:blueprint:ci"]
-description = "Full CI gate: mise task validation, metadata schema and manifest freshness"
+description = "Full CI gate: mise task validation plus metadata schema and invariants"
 tools = { python = "3.14" }
 run = [
   "mise tasks validate",
-  "python tools/validate-blueprint.py --check-manifest",
+  "python tools/validate-blueprint.py",
 ]
 
 # Requires `jsonschema`; skips cleanly when it is not installed. Install it into

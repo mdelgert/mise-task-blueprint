@@ -102,7 +102,6 @@ mise-task-blueprint/
 ├── tools/
 │   ├── validate-blueprint.py
 │   └── check-catalog-schema.py
-├── MANIFEST.json            # generated -- do not hand-edit
 └── .github/workflows/
     └── validate.yml
 ```
@@ -263,7 +262,6 @@ mise dev:metadata:python
 mise dev:catalog:json
 
 mise dev:blueprint:validate
-mise dev:blueprint:manifest
 mise dev:blueprint:schema
 mise dev:blueprint:ci
 
@@ -505,7 +503,6 @@ mise run dev:blueprint:ci        # the gate CI runs
 - `mise tasks validate` — mise's own task checks
 - `mise run dev:blueprint:validate` — metadata schema and task/metadata invariants
 - `mise run dev:blueprint:schema` — the generated catalog against `schemas/`
-- `mise run dev:blueprint:manifest` — regenerate `MANIFEST.json`
 
 `.github/workflows/validate.yml` runs the same gate on push and pull request,
 with `shellcheck` installed so that layer runs too.
