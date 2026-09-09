@@ -70,7 +70,7 @@ mise-task-blueprint/
 │   │   ├── core.toml
 │   │   ├── containers.toml
 │   │   └── compose.toml
-│   ├── development/
+│   ├── dev/
 │   │   ├── git.toml
 │   │   ├── runtimes.toml
 │   │   ├── github.toml
@@ -218,27 +218,27 @@ mise docker:compose:demo:down
 ### Development
 
 ```bash
-mise development:git:status
-mise development:git:log
+mise dev:git:status
+mise dev:git:log
 
-mise development:python:version
-mise development:python:hello
-mise development:node:version
-mise development:node:hello
+mise dev:python:version
+mise dev:python:hello
+mise dev:node:version
+mise dev:node:hello
 
-mise development:metadata:bash
-mise development:metadata:python
+mise dev:metadata:bash
+mise dev:metadata:python
 
-mise development:github:auth
-mise development:github:auth-status
-mise development:github:user
-mise development:github:pat:help
+mise dev:github:auth
+mise dev:github:auth-status
+mise dev:github:user
+mise dev:github:pat:help
 
-mise development:ssh:keygen
-mise development:age:keygen
-mise development:age:encrypt
-mise development:age:decrypt
-mise development:sops:demo
+mise dev:ssh:keygen
+mise dev:age:keygen
+mise dev:age:encrypt
+mise dev:age:decrypt
+mise dev:sops:demo
 ```
 
 ### Omarchy
@@ -286,11 +286,11 @@ The script contains an obvious placeholder section for future packages.
 These demonstrate the important mise pattern:
 
 ```toml
-["development:python:hello"]
+["dev:python:hello"]
 tools = { python = "3.14" }
 file = "../../scripts/python/task_metadata.py"
 
-["development:node:hello"]
+["dev:node:hello"]
 tools = { node = "24" }
 file = "../../scripts/node/hello.mjs"
 ```
@@ -302,13 +302,13 @@ The host doesn't need those particular Python/Node versions installed through it
 Bash:
 
 ```bash
-mise development:metadata:bash
+mise dev:metadata:bash
 ```
 
 Python:
 
 ```bash
-mise development:metadata:python
+mise dev:metadata:python
 ```
 
 Both output JSON containing useful execution context such as the task name, task directory, project root and original working directory.
@@ -320,8 +320,8 @@ A GitHub PAT is issued by GitHub. This blueprint intentionally does **not** fabr
 Instead:
 
 ```bash
-mise development:github:auth
-mise development:github:pat:help
+mise dev:github:auth
+mise dev:github:pat:help
 ```
 
 demonstrate the correct workflow using GitHub CLI and least-privilege guidance.
@@ -410,9 +410,9 @@ Useful commands:
 
 ```bash
 mise tasks ls
-mise development:metadata:all:bash
-mise development:metadata:all:python
-mise development:catalog:json
+mise dev:metadata:all:bash
+mise dev:metadata:all:python
+mise dev:catalog:json
 ```
 
 See `docs/CUSTOM-METADATA.md`.

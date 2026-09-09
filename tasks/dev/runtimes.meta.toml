@@ -1,110 +1,110 @@
 # Custom metadata sidecar.
 # Excluded from mise discovery; consumed by catalog metadata readers.
 
-[_.tasks."development:python:version"]
+[_.tasks."dev:python:version"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 98
-tags = ["development", "python", "version"]
-category = "development"
+tags = ["dev", "python", "version"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:python:version"
+anything_you_want = "custom metadata for dev:python:version"
 
-[_.tasks."development:python:hello"]
+[_.tasks."dev:python:hello"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 99
-tags = ["development", "python", "hello"]
-category = "development"
+tags = ["dev", "python", "hello"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:python:hello"
+anything_you_want = "custom metadata for dev:python:hello"
 
-[_.tasks."development:node:version"]
+[_.tasks."dev:node:version"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 100
-tags = ["development", "node", "version"]
-category = "development"
+tags = ["dev", "node", "version"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:node:version"
+anything_you_want = "custom metadata for dev:node:version"
 
-[_.tasks."development:node:hello"]
+[_.tasks."dev:node:hello"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 101
-tags = ["development", "node", "hello"]
-category = "development"
+tags = ["dev", "node", "hello"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:node:hello"
+anything_you_want = "custom metadata for dev:node:hello"
 
-[_.tasks."development:metadata:bash"]
+[_.tasks."dev:metadata:bash"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 102
-tags = ["development", "metadata", "bash"]
-category = "development"
+tags = ["dev", "metadata", "bash"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:metadata:bash"
+anything_you_want = "custom metadata for dev:metadata:bash"
 
-[_.tasks."development:metadata:python"]
+[_.tasks."dev:metadata:python"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 103
-tags = ["development", "metadata", "python"]
-category = "development"
+tags = ["dev", "metadata", "python"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:metadata:python"
+anything_you_want = "custom metadata for dev:metadata:python"
 
-[_.tasks."development:metadata:all:bash"]
+[_.tasks."dev:metadata:all:bash"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 104
-tags = ["development", "metadata", "all", "bash"]
-category = "development"
+tags = ["dev", "metadata", "all", "bash"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:metadata:all:bash"
+anything_you_want = "custom metadata for dev:metadata:all:bash"
 
-[_.tasks."development:metadata:all:python"]
+[_.tasks."dev:metadata:all:python"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 105
-tags = ["development", "metadata", "all", "python"]
-category = "development"
+tags = ["dev", "metadata", "all", "python"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:metadata:all:python"
+anything_you_want = "custom metadata for dev:metadata:all:python"
 
-[_.tasks."development:catalog:json"]
+[_.tasks."dev:catalog:json"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 106
-tags = ["development", "catalog", "json"]
-category = "development"
+tags = ["dev", "catalog", "json"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:catalog:json"
+anything_you_want = "custom metadata for dev:catalog:json"

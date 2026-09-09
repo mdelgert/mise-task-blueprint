@@ -42,7 +42,7 @@ Examples:
 system:logs:errors
 network:http:weather
 docker:compose:up
-development:ssh:keygen
+dev:ssh:keygen
 omarchy:hypr:monitors
 ```
 

@@ -3,74 +3,74 @@
 # It deliberately uses the same [_.tasks.<name>] namespace supported
 # by normal mise config files, while remaining arbitrary TOML for our catalog.
 
-[_.tasks."development:git:status"]
+[_.tasks."dev:git:status"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 1
-tags = ["development", "git", "status"]
-category = "development"
+tags = ["dev", "git", "status"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:git:status"
+anything_you_want = "custom metadata for dev:git:status"
 
-[_.tasks."development:git:log"]
+[_.tasks."dev:git:log"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 2
-tags = ["development", "git", "log"]
-category = "development"
+tags = ["dev", "git", "log"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:git:log"
+anything_you_want = "custom metadata for dev:git:log"
 
-[_.tasks."development:git:branches"]
+[_.tasks."dev:git:branches"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 3
-tags = ["development", "git", "branches"]
-category = "development"
+tags = ["dev", "git", "branches"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:git:branches"
+anything_you_want = "custom metadata for dev:git:branches"
 
-[_.tasks."development:git:remotes"]
+[_.tasks."dev:git:remotes"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 4
-tags = ["development", "git", "remotes"]
-category = "development"
+tags = ["dev", "git", "remotes"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:git:remotes"
+anything_you_want = "custom metadata for dev:git:remotes"
 
-[_.tasks."development:git:tag"]
+[_.tasks."dev:git:tag"]
 icon = "code"
 risk = "medium"
 enabled = true
 number = 5
-tags = ["development", "git", "tag"]
-category = "development"
+tags = ["dev", "git", "tag"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:git:tag"
+anything_you_want = "custom metadata for dev:git:tag"
 
-[_.tasks."development:git:tags:all"]
+[_.tasks."dev:git:tags:all"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 6
-tags = ["development", "git", "tags", "all"]
-category = "development"
+tags = ["dev", "git", "tags", "all"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:git:tags:all"
+anything_you_want = "custom metadata for dev:git:tags:all"

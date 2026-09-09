@@ -1,23 +1,23 @@
-["development:github:auth"]
+["dev:github:auth"]
 description = "Start GitHub CLI authentication instead of hard-coding a PAT"
 raw = true
 run = "gh auth login"
 
-["development:github:auth-status"]
+["dev:github:auth-status"]
 description = "Show GitHub CLI authentication status"
 run = "gh auth status"
 
-["development:github:user"]
+["dev:github:user"]
 description = "Call the authenticated GitHub REST API and show basic user metadata"
 tools = { jq = "latest" }
 run = "gh api user | jq '{login, name, id, html_url}'"
 
-["development:github:repo"]
+["dev:github:repo"]
 description = "Show GitHub repository information for the current repository"
 dir = "{{cwd}}"
 run = "gh repo view"
 
-["development:github:pat:help"]
+["dev:github:pat:help"]
 description = "Explain the safe GitHub PAT workflow without printing or fabricating a token"
 run = '''
 cat <<'EOF'
@@ -31,8 +31,8 @@ Recommended workflow:
   5. Never commit it or echo it from automation.
 
 Useful tasks:
-  mise development:github:auth
-  mise development:github:auth-status
-  mise development:github:user
+  mise dev:github:auth
+  mise dev:github:auth-status
+  mise dev:github:user
 EOF
 '''

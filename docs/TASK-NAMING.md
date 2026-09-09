@@ -15,8 +15,8 @@ system:pkg:install-core
 network:http:weather
 docker:container:shell
 docker:compose:up
-development:metadata:python
-development:ssh:keygen
+dev:metadata:python
+dev:ssh:keygen
 omarchy:hypr:monitors
 ```
 

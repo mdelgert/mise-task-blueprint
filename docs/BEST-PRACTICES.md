@@ -11,7 +11,7 @@ tasks/
 ├── system/
 ├── network/
 ├── docker/
-├── development/
+├── dev/
 └── omarchy/
 ```
 
@@ -98,7 +98,7 @@ Keep the task definition declarative and the implementation testable.
 ## 7. Declare task-specific runtimes with mise
 
 ```toml
-["development:metadata:python"]
+["dev:metadata:python"]
 description = "Return task metadata as JSON"
 tools = { python = "3.14" }
 file = "../../scripts/python/task_metadata.py"
@@ -117,7 +117,7 @@ Use mise primarily for developer runtimes and CLI tools where its backend model 
 Examples:
 
 ```toml
-["development:git:status"]
+["dev:git:status"]
 dir = "{{cwd}}"
 run = "git status"
 ```

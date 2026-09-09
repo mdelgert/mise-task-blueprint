@@ -97,7 +97,7 @@ Prefer these existing top-level categories:
 - `system`
 - `network`
 - `docker`
-- `development`
+- `dev`
 - `omarchy`
 
 Create a new category only when none of these fits.

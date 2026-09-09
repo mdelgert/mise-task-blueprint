@@ -114,13 +114,13 @@ continues to see only real executable tasks.
 Bash wrapper:
 
 ```bash
-mise development:metadata:all:bash
+mise dev:metadata:all:bash
 ```
 
 Direct Python:
 
 ```bash
-mise development:metadata:all:python
+mise dev:metadata:all:python
 ```
 
 Both return a JSON object keyed by task name.
@@ -128,7 +128,7 @@ Both return a JSON object keyed by task name.
 ## Build future plugin-style catalog JSON
 
 ```bash
-mise development:catalog:json
+mise dev:catalog:json
 ```
 
 This performs:

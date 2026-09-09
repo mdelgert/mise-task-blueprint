@@ -3,62 +3,62 @@
 # It deliberately uses the same [_.tasks.<name>] namespace supported
 # by normal mise config files, while remaining arbitrary TOML for our catalog.
 
-[_.tasks."development:github:auth"]
+[_.tasks."dev:github:auth"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 5
-tags = ["development", "github", "auth"]
-category = "development"
+tags = ["dev", "github", "auth"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = true
-anything_you_want = "custom metadata for development:github:auth"
+anything_you_want = "custom metadata for dev:github:auth"
 
-[_.tasks."development:github:auth-status"]
+[_.tasks."dev:github:auth-status"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 6
-tags = ["development", "github", "auth-status"]
-category = "development"
+tags = ["dev", "github", "auth-status"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:github:auth-status"
+anything_you_want = "custom metadata for dev:github:auth-status"
 
-[_.tasks."development:github:user"]
+[_.tasks."dev:github:user"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 7
-tags = ["development", "github", "user"]
-category = "development"
+tags = ["dev", "github", "user"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:github:user"
+anything_you_want = "custom metadata for dev:github:user"
 
-[_.tasks."development:github:repo"]
+[_.tasks."dev:github:repo"]
 icon = "code"
 risk = "low"
 enabled = true
 number = 8
-tags = ["development", "github", "repo"]
-category = "development"
+tags = ["dev", "github", "repo"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for development:github:repo"
+anything_you_want = "custom metadata for dev:github:repo"
 
-[_.tasks."development:github:pat:help"]
+[_.tasks."dev:github:pat:help"]
 icon = "code"
 risk = "medium"
 enabled = true
 number = 9
-tags = ["development", "github", "pat", "help"]
-category = "development"
+tags = ["dev", "github", "pat", "help"]
+category = "dev"
 destructive = false
 requires_sudo = false
 interactive = true
-anything_you_want = "custom metadata for development:github:pat:help"
+anything_you_want = "custom metadata for dev:github:pat:help"

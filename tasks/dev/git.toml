@@ -1,29 +1,29 @@
-["development:git:status"]
+["dev:git:status"]
 description = "Show Git working-tree status in the current directory"
 dir = "{{cwd}}"
 run = "git status"
 
-["development:git:log"]
+["dev:git:log"]
 description = "Show a compact decorated Git graph"
 dir = "{{cwd}}"
 run = "git log --graph --decorate --oneline --all -n 30"
 
-["development:git:branches"]
+["dev:git:branches"]
 description = "List local and remote Git branches"
 dir = "{{cwd}}"
 run = "git branch -a -vv"
 
-["development:git:remotes"]
+["dev:git:remotes"]
 description = "Show Git remotes"
 dir = "{{cwd}}"
 run = "git remote -v"
 
-["development:git:tag"]
+["dev:git:tag"]
 description = "Create and push a Git tag"
 dir = "{{cwd}}"
 file = "scripts/bash/git-tag.sh"
 
-["development:git:tags:all"]
+["dev:git:tags:all"]
 description = "List all Git tags including annotated and lightweight tags"
 dir = "{{cwd}}"
 run = "git tag -l"
