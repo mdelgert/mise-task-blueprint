@@ -1,17 +1,24 @@
+# Minimum version of mise required to run this configuration
 min_version = "2026.8.0"
+
+# Tools configuration for the project
+[tools]
+# node = "22"
+# python = "3.13"
 
 [task_config]
 includes = ["tasks"]
 excludes = ["tasks/**/*.meta.toml"]
 
 [env]
-MISE_BLUEPRINT = "1"
+MISE_BLUEPRINT = "1.0"
+# MISE_VERBOSE = 1
 
 # Exact custom metadata pattern.
 # Top-level "_" is an arbitrary-data namespace in normal mise config files.
 [tasks.hello]
 description = "Simple task demonstrating native task config plus arbitrary custom metadata"
-run = "echo hello"
+run = "echo hello task"
 
 [_.tasks.hello]
 icon = "hand"

@@ -1,0 +1,22 @@
+["system:diag"]
+description = "Run mise diagnostic task"
+run = '''
+mise --version
+node --version
+python --version
+echo "MISE_PROJECT_ROOT=$MISE_PROJECT_ROOT"
+echo "MISE_CONFIG_ROOT=$MISE_CONFIG_ROOT"
+echo "MISE_ORIGINAL_CWD=$MISE_ORIGINAL_CWD"
+'''
+
+["system:diag:bash"]
+description = "Run bash script"
+run = "scripts/bash/hello-bash.sh"
+
+["system:diag:python"]
+description = "Run python script"
+run = "python scripts/python/hello-python.py"
+
+["system:diag:node"]
+description = "Run node script"
+run = "node scripts/node/hello-node.mjs"

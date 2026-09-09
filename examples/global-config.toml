@@ -1,8 +1,0 @@
-# Example ~/.config/mise/config.toml
-# Update the repository location to match your machine.
-
-[task_config]
-includes = [
-  "{{env.HOME}}/.config/mise/tasks",
-  "{{env.HOME}}/Source/private/mise-task-blueprint/tasks",
-]
