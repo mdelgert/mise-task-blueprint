@@ -1,76 +1,78 @@
-# Custom metadata sidecar.
-# This file is excluded from mise task discovery by task_config.excludes.
-# It deliberately uses the same [_.tasks.<name>] namespace supported
-# by normal mise config files, while remaining arbitrary TOML for our catalog.
+# Custom metadata sidecar for git.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
 
 [_.tasks."dev:git:status"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 1
 tags = ["dev", "git", "status"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:git:status"
+cwd_scope = "caller"
 
 [_.tasks."dev:git:log"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 2
 tags = ["dev", "git", "log"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:git:log"
+cwd_scope = "caller"
 
 [_.tasks."dev:git:branches"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 3
 tags = ["dev", "git", "branches"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:git:branches"
+cwd_scope = "caller"
 
 [_.tasks."dev:git:remotes"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 4
 tags = ["dev", "git", "remotes"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:git:remotes"
+cwd_scope = "caller"
 
 [_.tasks."dev:git:tag"]
 icon = "code"
 risk = "medium"
 enabled = true
-number = 123
 tags = ["dev", "git", "tag"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:git:tag"
+cwd_scope = "caller"
 
 [_.tasks."dev:git:tags:all"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 124
 tags = ["dev", "git", "tags", "all"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:git:tags:all"
+cwd_scope = "caller"

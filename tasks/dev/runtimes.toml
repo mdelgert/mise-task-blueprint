@@ -4,9 +4,9 @@ tools = { python = "3.14" }
 run = "python --version"
 
 ["dev:python:hello"]
-description = "Run the Python metadata example using a mise-managed Python runtime"
+description = "Run the hello-python.py sample script on a mise-managed Python runtime"
 tools = { python = "3.14" }
-file = "scripts/python/task_metadata.py"
+file = "scripts/python/hello-python.py"
 
 ["dev:node:version"]
 description = "Run a mise-managed Node runtime and print its version"
@@ -20,7 +20,7 @@ file = "scripts/node/hello.mjs"
 
 ["dev:metadata:bash"]
 description = "Return useful mise/task/project metadata as JSON from Bash"
-tools = { jq = "latest" }
+tools = { jq = "1" }
 file = "scripts/bash/task-metadata.sh"
 
 ["dev:metadata:python"]

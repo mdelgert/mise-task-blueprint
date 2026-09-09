@@ -9,8 +9,8 @@ The point of this repository is to prove the complete CLI and authoring workflow
 ```bash
 cd mise-task-blueprint
 
-# Parse every TOML file without executing tasks
-python tools/validate-blueprint.py
+# Validate syntax, metadata schema and task/metadata invariants
+mise run dev:blueprint:validate
 
 # Native mise validation/discovery
 mise tasks validate
@@ -40,7 +40,8 @@ mise run docker:ps
 7. **Destructive tasks use `confirm`.**
 8. **Task-specific runtimes use mise `tools`.**
 9. **OS-integrated applications/services use the OS package manager where appropriate.**
-10. **No plugin code lives here.**
+10. **Tasks that take arguments declare them**, so a UI can render inputs.
+11. **No plugin code lives here** — the blueprint publishes a contract instead.
 
 ## Layout
 
@@ -53,9 +54,14 @@ mise-task-blueprint/
 ├── docs/
 │   ├── GLOBAL-SETUP.md
 │   ├── AUTHORING-GUIDE.md
+│   ├── BEST-PRACTICES.md
+│   ├── CUSTOM-METADATA.md
+│   ├── PLUGIN-CONTRACT.md
 │   ├── SECURITY.md
 │   └── TASK-NAMING.md
 ├── tasks/
+│   ├── ai/
+│   │   └── agents.toml
 │   ├── system/
 │   │   ├── info.toml
 │   │   ├── packages.toml
@@ -71,6 +77,7 @@ mise-task-blueprint/
 │   │   ├── containers.toml
 │   │   └── compose.toml
 │   ├── dev/
+│   │   ├── blueprint.toml
 │   │   ├── git.toml
 │   │   ├── runtimes.toml
 │   │   ├── github.toml
@@ -84,13 +91,24 @@ mise-task-blueprint/
 │   └── node/
 ├── examples/
 │   ├── docker-compose/
+│   ├── overlays/            # personal shortcuts to copy into your own config
 │   └── global-config.toml
+├── schemas/                 # the machine-readable plugin contract
+│   ├── catalog.schema.json
+│   └── task-metadata.schema.json
 ├── skills/
 │   └── mise-task-authoring/
 │       └── SKILL.md
-└── tools/
-    └── validate-blueprint.py
+├── tools/
+│   ├── validate-blueprint.py
+│   └── check-catalog-schema.py
+├── MANIFEST.json            # generated -- do not hand-edit
+└── .github/workflows/
+    └── validate.yml
 ```
+
+Each `tasks/**/x.toml` has an adjacent `x.meta.toml` sidecar holding its
+catalog metadata.
 
 ## Why explicit task names
 
@@ -139,7 +157,21 @@ description = "Show recent logs for a systemd unit"
 file = "scripts/bash/logs-unit.sh"
 ```
 
-Do not invent arbitrary mise task keys such as `risk`, `tags`, or `category` until you deliberately add a separate plugin metadata schema.
+Do not invent arbitrary mise task keys such as `risk`, `tags`, or `category`
+inside the task table -- those live in the `*.meta.toml` sidecar under `_`. See
+`docs/CUSTOM-METADATA.md`.
+
+Tasks that read arguments declare them, so `mise <task> --help` works and a UI
+can discover parameters:
+
+```toml
+["network:trace"]
+description = "Trace route to a host"
+usage = '''
+arg "<host>" help="Host name or IP address to trace a route to"
+'''
+run = 'traceroute "$usage_host"'
+```
 
 ## Categories
 
@@ -228,6 +260,12 @@ mise dev:node:hello
 
 mise dev:metadata:bash
 mise dev:metadata:python
+mise dev:catalog:json
+
+mise dev:blueprint:validate
+mise dev:blueprint:manifest
+mise dev:blueprint:schema
+mise dev:blueprint:ci
 
 mise dev:github:auth
 mise dev:github:auth-status
@@ -255,6 +293,17 @@ mise omarchy:hypr:clients
 mise omarchy:hypr:binds
 mise omarchy:hypr:devices
 mise omarchy:hypr:reload
+```
+
+### AI agents
+
+Each hands the terminal to a full-screen agent TUI and runs it with its own
+approval gate disabled, so each carries an explicit `confirm`:
+
+```bash
+mise ai:claude
+mise ai:copilot
+mise ai:codex
 ```
 
 ## Package installation example
@@ -288,7 +337,7 @@ These demonstrate the important mise pattern:
 ```toml
 ["dev:python:hello"]
 tools = { python = "3.14" }
-file = "scripts/python/task_metadata.py"
+file = "scripts/python/hello-python.py"
 
 ["dev:node:hello"]
 tools = { node = "24" }
@@ -378,7 +427,8 @@ Read `docs/SECURITY.md` for the blueprint rules.
 
 ## Custom metadata: the important `_` namespace
 
-The blueprint now explicitly demonstrates the arbitrary metadata pattern:
+Mise reserves top-level `_` for arbitrary data, which this blueprint uses to
+carry catalog metadata alongside strictly-validated mise tasks:
 
 ```toml
 [tasks.hello]
@@ -388,15 +438,18 @@ run = "echo hello"
 [_.tasks.hello]
 icon = "hand"
 risk = "low"
-anything_you_want = "test"
 enabled = true
-number = 123
-tags = ["example", "test"]
+tags = ["example"]
+category = "root"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
 ```
 
-For included task TOMLs, metadata is stored in adjacent `*.meta.toml` sidecars because mise's included-task schema treats every root key as a task.
-
-Example:
+For included task TOMLs, metadata is stored in adjacent `*.meta.toml` sidecars
+because mise's included-task schema treats every root key as a task.
 
 ```text
 tasks/docker/
@@ -406,7 +459,9 @@ tasks/docker/
 
 `mise.toml` excludes `*.meta.toml` files from task discovery.
 
-Useful commands:
+Ten fields are required and validated. Four of them mirror the task definition
+(`category`, `requires_confirm`, `interactive`, `cwd_scope`) and the validator
+fails if they disagree with it.
 
 ```bash
 mise tasks ls
@@ -417,5 +472,42 @@ mise dev:catalog:json
 
 See `docs/CUSTOM-METADATA.md`.
 
+## Building a UI on top of this
+
+The blueprint contains no plugin code. It publishes a versioned contract:
+
+```bash
+mise dev:catalog:json     # schemas/catalog.schema.json
+```
+
+Each task in that output carries its typed `args` and an `execution` block
+telling a launcher what it needs: a TTY, a confirmation dialog, a working
+directory, or elevated privileges.
+
+That block exists because four things a consumer needs cannot be obtained from
+mise alone:
+
+| Need              | Why mise is not enough                                   |
+| ----------------- | -------------------------------------------------------- |
+| arguments         | `tasks ls --json` omits them; only `tasks info` has them |
+| confirmation      | `confirm` appears in **no** `--json` output              |
+| terminal handling | `raw` tasks must get a TTY, not a captured pipe          |
+| working directory | `dir = "{{cwd}}"` is already resolved away in the JSON   |
+
+Read `docs/PLUGIN-CONTRACT.md` before writing a consumer.
+
+## Validation and CI
+
+```bash
+mise run dev:blueprint:ci        # the gate CI runs
+```
+
+- `mise tasks validate` — mise's own task checks
+- `mise run dev:blueprint:validate` — metadata schema and task/metadata invariants
+- `mise run dev:blueprint:schema` — the generated catalog against `schemas/`
+- `mise run dev:blueprint:manifest` — regenerate `MANIFEST.json`
+
+`.github/workflows/validate.yml` runs the same gate on push and pull request,
+with `shellcheck` installed so that layer runs too.
 
 For the design rationale and conventions, read `docs/BEST-PRACTICES.md`.

@@ -1,3 +1,19 @@
+# Personal shortcut overlay -- NOT part of the blueprint task catalog.
+#
+# These tasks hard-code local paths and a specific repository, so they live here
+# instead of tasks/ to keep the blueprint generic and its categories aligned with
+# docs/TASK-NAMING.md.
+#
+# To use them, copy this file into your own config and adjust the paths:
+#
+#   cp examples/overlays/shortcuts.toml ~/.config/mise/tasks/shortcuts.toml
+#
+# Note: "script:meta" references scripts/bash/read-meta.sh from this repository.
+# Point it at an absolute path, or use the supported blueprint equivalents:
+#
+#   mise dev:metadata:all:python
+#   mise dev:catalog:json
+
 # Shortcuts for opening repositories in VSCode
 ["code:mise"]
 description = "VSCODE open mise repository"

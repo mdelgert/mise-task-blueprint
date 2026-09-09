@@ -1,13 +1,10 @@
 ["docker:container:inspect"]
 description = "Inspect a container; pass container name or ID"
-run = '''
-container="${1:-}"
-if [[ -z "$container" ]]; then
-  echo "Usage: mise run docker:container:inspect <container>" >&2
-  exit 2
-fi
-docker inspect "$container"
+usage = '''
+arg "<container>" help="Container name or ID to inspect"
 '''
+# Inline `run` bodies receive declared args as $usage_<name>, not as $1.
+run = 'docker inspect "$usage_container"'
 
 ["docker:container:logs"]
 description = "Show recent container logs; pass container name/ID and optional line count"

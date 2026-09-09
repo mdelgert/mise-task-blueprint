@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+#USAGE arg "[path]" help="Output key path (default: ~/.ssh/id_ed25519_mise_example)"
+
 default_path="${HOME}/.ssh/id_ed25519_mise_example"
 path="${1:-$default_path}"
 

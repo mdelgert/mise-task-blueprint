@@ -1,208 +1,210 @@
-# Custom metadata sidecar.
-# This file is excluded from mise task discovery by task_config.excludes.
-# It deliberately uses the same [_.tasks.<name>] namespace supported
-# by normal mise config files, while remaining arbitrary TOML for our catalog.
+# Custom metadata sidecar for compose.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
 
 [_.tasks."docker:compose:config"]
 icon = "container"
 risk = "low"
 enabled = true
-number = 21
 tags = ["docker", "compose", "config"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for docker:compose:config"
+cwd_scope = "caller"
 
 [_.tasks."docker:compose:up"]
 icon = "container"
 risk = "low"
 enabled = true
-number = 22
 tags = ["docker", "compose", "up"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = true
-anything_you_want = "custom metadata for docker:compose:up"
+cwd_scope = "caller"
 
 [_.tasks."docker:compose:up-detached"]
 icon = "container"
 risk = "low"
 enabled = true
-number = 23
 tags = ["docker", "compose", "up-detached"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for docker:compose:up-detached"
+cwd_scope = "caller"
 
 [_.tasks."docker:compose:down"]
 icon = "container"
 risk = "medium"
 enabled = true
-number = 24
 tags = ["docker", "compose", "down"]
 category = "docker"
-destructive = true
+destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for docker:compose:down"
+cwd_scope = "caller"
 
 [_.tasks."docker:compose:ps"]
 icon = "container"
 risk = "low"
 enabled = true
-number = 25
 tags = ["docker", "compose", "ps"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for docker:compose:ps"
+cwd_scope = "caller"
 
 [_.tasks."docker:compose:logs"]
 icon = "container"
 risk = "low"
 enabled = true
-number = 26
 tags = ["docker", "compose", "logs"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = true
-anything_you_want = "custom metadata for docker:compose:logs"
+cwd_scope = "caller"
 
 [_.tasks."docker:compose:pull"]
 icon = "container"
 risk = "low"
 enabled = true
-number = 27
 tags = ["docker", "compose", "pull"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for docker:compose:pull"
+cwd_scope = "caller"
 
 [_.tasks."docker:compose:build"]
 icon = "container"
 risk = "low"
 enabled = true
-number = 28
 tags = ["docker", "compose", "build"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for docker:compose:build"
+cwd_scope = "caller"
 
 [_.tasks."docker:compose:restart"]
 icon = "container"
 risk = "low"
 enabled = true
-number = 29
 tags = ["docker", "compose", "restart"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for docker:compose:restart"
+cwd_scope = "caller"
 
 [_.tasks."docker:compose:demo:up"]
 icon = "container"
 risk = "low"
 enabled = true
-number = 30
 tags = ["docker", "compose", "demo", "up"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for docker:compose:demo:up"
+cwd_scope = "project"
 
 [_.tasks."docker:compose:demo:ps"]
 icon = "container"
 risk = "low"
 enabled = true
-number = 31
 tags = ["docker", "compose", "demo", "ps"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for docker:compose:demo:ps"
+cwd_scope = "project"
 
 [_.tasks."docker:compose:demo:logs"]
 icon = "container"
 risk = "low"
 enabled = true
-number = 32
 tags = ["docker", "compose", "demo", "logs"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = true
-anything_you_want = "custom metadata for docker:compose:demo:logs"
+cwd_scope = "project"
 
 [_.tasks."docker:compose:demo:down"]
 icon = "container"
 risk = "medium"
 enabled = true
-number = 33
 tags = ["docker", "compose", "demo", "down"]
 category = "docker"
-destructive = true
+destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for docker:compose:demo:down"
+cwd_scope = "project"
 
 [_.tasks."docker:compose:ubuntu:enter"]
 icon = "container"
 risk = "medium"
 enabled = true
-number = 112
 tags = ["docker", "compose", "ubuntu", "enter"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = true
-anything_you_want = "custom metadata for docker:compose:ubuntu:enter; pulls ubuntu:latest on first run"
+cwd_scope = "project"
 
 [_.tasks."docker:compose:ubuntu:down"]
 icon = "container"
 risk = "medium"
 enabled = true
-number = 113
 tags = ["docker", "compose", "ubuntu", "down"]
 category = "docker"
-destructive = true
+destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for docker:compose:ubuntu:down"
+cwd_scope = "project"
 
 [_.tasks."docker:compose:debian:enter"]
 icon = "container"
 risk = "medium"
 enabled = true
-number = 114
 tags = ["docker", "compose", "debian", "enter"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = true
-anything_you_want = "custom metadata for docker:compose:debian:enter; pulls debian:latest on first run"
+cwd_scope = "project"
 
 [_.tasks."docker:compose:debian:down"]
 icon = "container"
 risk = "medium"
 enabled = true
-number = 115
 tags = ["docker", "compose", "debian", "down"]
 category = "docker"
-destructive = true
+destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for docker:compose:debian:down"
+cwd_scope = "project"

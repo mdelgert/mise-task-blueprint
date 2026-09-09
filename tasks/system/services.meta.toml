@@ -1,40 +1,42 @@
-# Custom metadata sidecar.
-# This file is excluded from mise task discovery by task_config.excludes.
-# It deliberately uses the same [_.tasks.<name>] namespace supported
-# by normal mise config files, while remaining arbitrary TOML for our catalog.
+# Custom metadata sidecar for services.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
 
 [_.tasks."system:services:failed"]
 icon = "computer"
 risk = "low"
 enabled = true
-number = 95
 tags = ["system", "services", "failed"]
 category = "system"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for system:services:failed"
+cwd_scope = "project"
 
 [_.tasks."system:services:running"]
 icon = "computer"
 risk = "low"
 enabled = true
-number = 96
 tags = ["system", "services", "running"]
 category = "system"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for system:services:running"
+cwd_scope = "project"
 
 [_.tasks."system:services:user-running"]
 icon = "computer"
 risk = "low"
 enabled = true
-number = 97
 tags = ["system", "services", "user-running"]
 category = "system"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for system:services:user-running"
+cwd_scope = "project"

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mdelgert/mise-task-blueprint/schemas/catalog.schema.json",
+  "title": "Blueprint task catalog",
+  "description": "Output of `mise dev:catalog:json` (scripts/python/catalog_json.py). This is the contract a UI/plugin consumes. Additive changes keep schema_version; any breaking change bumps it.",
+  "type": "object",
+  "required": ["schema_version", "project", "task_count", "tasks"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "project": { "type": "string" },
+    "task_count": { "type": "integer", "minimum": 0 },
+    "tasks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/task" }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "task": {
+      "type": "object",
+      "required": ["name", "description", "category", "aliases", "args", "execution", "meta", "mise"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*(:[a-z0-9][a-z0-9-]*)*$",
+          "description": "The public task name; the stable CLI API. Pass to `mise run`."
+        },
+        "description": { "type": "string", "minLength": 1 },
+        "category": { "type": "string" },
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "args": {
+          "type": "array",
+          "description": "Positional parameters, flattened from mise's usage_spec. Populated only for tasks that declare a `#USAGE arg` line (scripts) or a `usage` property (inline run). Render these as form inputs.",
+          "items": { "$ref": "#/$defs/arg" }
+        },
+        "execution": { "$ref": "#/$defs/execution" },
+        "meta": {
+          "$ref": "./task-metadata.schema.json",
+          "description": "The task's [_.tasks.*] sidecar entry, verbatim."
+        },
+        "mise": {
+          "type": "object",
+          "description": "The raw `mise tasks ls --json` object for this task, passed through unmodified. Note that mise omits `confirm` here; use execution.needs_confirmation instead."
+        }
+      },
+      "additionalProperties": false
+    },
+    "arg": {
+      "type": "object",
+      "required": ["name", "help", "required", "default", "variadic"],
+      "properties": {
+        "name": { "type": "string" },
+        "help": { "type": "string" },
+        "required": { "type": "boolean" },
+        "default": { "type": ["string", "null"] },
+        "variadic": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "execution": {
+      "type": "object",
+      "description": "Everything a launcher needs to invoke the task correctly.",
+      "required": ["command", "needs_tty", "needs_confirmation", "confirm_bypass_flag", "cwd_scope", "requires_sudo"],
+      "properties": {
+        "command": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Base argv. Append declared args in order."
+        },
+        "needs_tty": {
+          "type": "boolean",
+          "description": "true means the task takes over the terminal (raw/interactive). Launch it in a terminal emulator; do not capture stdout."
+        },
+        "needs_confirmation": {
+          "type": "boolean",
+          "description": "true means the task carries a native `confirm`. Without a TTY mise aborts with \"requires confirmation but there was nobody to ask\", so a UI must show its own prompt and then append confirm_bypass_flag."
+        },
+        "confirm_bypass_flag": {
+          "type": ["string", "null"],
+          "description": "The flag to append after the UI has obtained consent (\"--yes\"), or null when the task needs no confirmation. Never pass this without asking the user first."
+        },
+        "cwd_scope": {
+          "enum": ["caller", "project"],
+          "description": "\"caller\": run with cwd set to a directory the user chooses. \"project\": run from the config root."
+        },
+        "requires_sudo": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

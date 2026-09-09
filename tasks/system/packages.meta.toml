@@ -1,40 +1,42 @@
-# Custom metadata sidecar.
-# This file is excluded from mise task discovery by task_config.excludes.
-# It deliberately uses the same [_.tasks.<name>] namespace supported
-# by normal mise config files, while remaining arbitrary TOML for our catalog.
+# Custom metadata sidecar for packages.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
 
 [_.tasks."system:pkg:install-core"]
 icon = "computer"
 risk = "medium"
 enabled = true
-number = 92
 tags = ["system", "pkg", "install-core"]
 category = "system"
 destructive = false
+requires_confirm = false
 requires_sudo = true
 interactive = false
-anything_you_want = "custom metadata for system:pkg:install-core"
+cwd_scope = "project"
 
 [_.tasks."system:pkg:update"]
 icon = "computer"
 risk = "high"
 enabled = true
-number = 93
 tags = ["system", "pkg", "update"]
 category = "system"
 destructive = false
+requires_confirm = true
 requires_sudo = true
 interactive = false
-anything_you_want = "custom metadata for system:pkg:update"
+cwd_scope = "project"
 
 [_.tasks."system:pkg:search"]
 icon = "computer"
 risk = "low"
 enabled = true
-number = 94
 tags = ["system", "pkg", "search"]
 category = "system"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for system:pkg:search"
+cwd_scope = "caller"

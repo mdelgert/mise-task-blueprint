@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mdelgert/mise-task-blueprint/schemas/task-metadata.schema.json",
+  "title": "Blueprint task metadata ([_.tasks.<name>] sidecar entry)",
+  "description": "One entry from a tasks/**/*.meta.toml sidecar. Enforced by tools/validate-blueprint.py, which additionally checks each entry against the task it describes.",
+  "type": "object",
+  "required": [
+    "icon",
+    "risk",
+    "enabled",
+    "tags",
+    "category",
+    "destructive",
+    "requires_confirm",
+    "requires_sudo",
+    "interactive",
+    "cwd_scope"
+  ],
+  "properties": {
+    "icon": {
+      "type": "string",
+      "description": "Icon hint for a UI. Free-form; the consumer maps it to its own icon set."
+    },
+    "risk": {
+      "enum": ["low", "medium", "high"],
+      "description": "low: read-only or trivially reversible. medium: changes local state, installs software, creates credentials, or contacts external systems. high: destructive, privilege-heavy, or hard to reverse."
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "false hides the task from catalog consumers without removing it from mise."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Free-form search/filter keywords."
+    },
+    "category": {
+      "type": "string",
+      "description": "Must equal the task name's prefix before the first colon, or \"root\" for a task with no colon. Duplicated from the name deliberately so consumers need not parse it; the validator keeps the two in sync."
+    },
+    "destructive": {
+      "type": "boolean",
+      "description": "true when the task can irreversibly destroy state. Implies requires_confirm and risk = \"high\"."
+    },
+    "requires_confirm": {
+      "type": "boolean",
+      "description": "Mirrors the task's native `confirm` property, which mise does NOT expose in any --json output. This is the only machine-readable signal that a task is gated, so a UI must present its own confirmation before passing --yes."
+    },
+    "requires_sudo": {
+      "type": "boolean",
+      "description": "true when the task escalates privileges. Cannot be combined with risk = \"low\"."
+    },
+    "interactive": {
+      "type": "boolean",
+      "description": "Mirrors the task's `raw` or `interactive` property. true means the task hands the TTY to a child process, so a UI must open a terminal rather than capture stdout."
+    },
+    "cwd_scope": {
+      "enum": ["caller", "project"],
+      "description": "\"caller\" mirrors dir = \"{{cwd}}\": the task acts on the invoking directory, so a UI with no meaningful cwd must ask the user for one. \"project\" means the task runs from the config root."
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+#USAGE arg "<input>" help="File to encrypt"
+#USAGE arg "[output]" help="Output path (default: <input>.age)"
+
 # Recipient is derived automatically from the local age identity (same
 # default path dev:age:keygen writes to), so callers only pass a filename.
 identity="${MISE_AGE_IDENTITY:-${HOME}/.config/mise-blueprint/age-identity.txt}"

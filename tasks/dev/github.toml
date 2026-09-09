@@ -9,7 +9,7 @@ run = "gh auth status"
 
 ["dev:github:user"]
 description = "Call the authenticated GitHub REST API and show basic user metadata"
-tools = { jq = "latest" }
+tools = { jq = "1" }
 run = "gh api user | jq '{login, name, id, html_url}'"
 
 ["dev:github:repo"]

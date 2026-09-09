@@ -1,6 +1,11 @@
 # Minimum version of mise required to run this configuration
 min_version = "2026.8.0"
 
+[settings]
+# Record resolved tool versions in mise.lock so `latest` in a task's `tools`
+# cannot silently drift between machines or over time.
+lockfile = true
+
 # Tools configuration for the project
 [tools]
 # node = "22"
@@ -33,13 +38,13 @@ file = "scripts/bash/tasks-by-category.sh"
 icon = "list"
 risk = "low"
 enabled = true
-number = 125
 tags = ["tasks", "by-category"]
 category = "root"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "root-level task kept out of tasks/ for quick access"
+cwd_scope = "project"
 
 # `mise` alone shows mise's own built-in CLI help (not configurable), and a
 # task literally named "help" is shadowed by mise's built-in `help` subcommand
@@ -55,13 +60,13 @@ file = "scripts/bash/menu.sh"
 icon = "help-circle"
 risk = "low"
 enabled = true
-number = 126
 tags = ["help", "menu", "categories"]
 category = "root"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "named menu instead of help because mise's built-in help subcommand shadows a task literally named help"
+cwd_scope = "project"
 
 # Exact custom metadata pattern.
 # Top-level "_" is an arbitrary-data namespace in normal mise config files.

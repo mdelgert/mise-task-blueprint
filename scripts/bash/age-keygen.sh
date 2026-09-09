@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+#USAGE arg "[path]" help="Identity path (default: ~/.config/mise-blueprint/age-identity.txt)"
+
 path="${1:-${HOME}/.config/mise-blueprint/age-identity.txt}"
 mkdir -p "$(dirname "$path")"
 chmod 700 "$(dirname "$path")"

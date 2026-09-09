@@ -1,110 +1,114 @@
-# Custom metadata sidecar.
-# Excluded from mise discovery; consumed by catalog metadata readers.
+# Custom metadata sidecar for runtimes.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
 
 [_.tasks."dev:python:version"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 98
 tags = ["dev", "python", "version"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:python:version"
+cwd_scope = "project"
 
 [_.tasks."dev:python:hello"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 99
 tags = ["dev", "python", "hello"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:python:hello"
+cwd_scope = "project"
 
 [_.tasks."dev:node:version"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 100
 tags = ["dev", "node", "version"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:node:version"
+cwd_scope = "project"
 
 [_.tasks."dev:node:hello"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 101
 tags = ["dev", "node", "hello"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:node:hello"
+cwd_scope = "project"
 
 [_.tasks."dev:metadata:bash"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 102
 tags = ["dev", "metadata", "bash"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:metadata:bash"
+cwd_scope = "project"
 
 [_.tasks."dev:metadata:python"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 103
 tags = ["dev", "metadata", "python"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:metadata:python"
+cwd_scope = "project"
 
 [_.tasks."dev:metadata:all:bash"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 104
 tags = ["dev", "metadata", "all", "bash"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:metadata:all:bash"
+cwd_scope = "project"
 
 [_.tasks."dev:metadata:all:python"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 105
 tags = ["dev", "metadata", "all", "python"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:metadata:all:python"
+cwd_scope = "project"
 
 [_.tasks."dev:catalog:json"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 106
 tags = ["dev", "catalog", "json"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:catalog:json"
+cwd_scope = "project"

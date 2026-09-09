@@ -1,64 +1,66 @@
-# Custom metadata sidecar.
-# This file is excluded from mise task discovery by task_config.excludes.
-# It deliberately uses the same [_.tasks.<name>] namespace supported
-# by normal mise config files, while remaining arbitrary TOML for our catalog.
+# Custom metadata sidecar for github.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
 
 [_.tasks."dev:github:auth"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 5
 tags = ["dev", "github", "auth"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = true
-anything_you_want = "custom metadata for dev:github:auth"
+cwd_scope = "project"
 
 [_.tasks."dev:github:auth-status"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 6
 tags = ["dev", "github", "auth-status"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:github:auth-status"
+cwd_scope = "project"
 
 [_.tasks."dev:github:user"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 7
 tags = ["dev", "github", "user"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:github:user"
+cwd_scope = "project"
 
 [_.tasks."dev:github:repo"]
 icon = "code"
 risk = "low"
 enabled = true
-number = 8
 tags = ["dev", "github", "repo"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for dev:github:repo"
+cwd_scope = "caller"
 
 [_.tasks."dev:github:pat:help"]
 icon = "code"
 risk = "medium"
 enabled = true
-number = 9
 tags = ["dev", "github", "pat", "help"]
 category = "dev"
 destructive = false
+requires_confirm = false
 requires_sudo = false
-interactive = true
-anything_you_want = "custom metadata for dev:github:pat:help"
+interactive = false
+cwd_scope = "project"
