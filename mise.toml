@@ -52,22 +52,28 @@ requires_sudo = false
 interactive = false
 anything_you_want = "root-level task kept out of tasks/ for quick access"
 
-# `mise` alone still shows mise's own built-in CLI help (not configurable).
-# `mise help` is the closest thing to a project-level help: it just lists
-# every task with its description, always in sync since it reads live data.
-[tasks.help]
-description = "List all mise tasks with descriptions (project help)"
+# `mise` alone shows mise's own built-in CLI help (not configurable), and a
+# task literally named "help" is shadowed by mise's built-in `help` subcommand
+# too, so this project entry point is named "menu" instead (alias: "h").
+# It lists categories rather than every task, since `mise tasks ls` already
+# dumps the full list and categories are the fastest way to narrow it down.
+[tasks.menu]
+description = "List task categories and how to filter tasks by one (project help)"
 alias = "h"
-run = "mise tasks ls"
+run = '''
+echo "Categories: ai, dev, docker, network, omarchy, root, system"
+echo "See tasks in a category: mise cat <category>   (e.g. mise cat system)"
+echo "See every task:          mise tasks ls"
+'''
 
-[_.tasks.help]
+[_.tasks.menu]
 icon = "help-circle"
 risk = "low"
 enabled = true
 number = 2
-tags = ["help", "tasks"]
+tags = ["help", "menu", "categories"]
 category = "root"
 destructive = false
 requires_sudo = false
 interactive = false
-anything_you_want = "thin wrapper around mise tasks ls kept for discoverability"
+anything_you_want = "named menu instead of help because mise's built-in help subcommand shadows a task literally named help"
