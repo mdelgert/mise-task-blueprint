@@ -1,23 +1,86 @@
+# Minimum version of mise required to run this configuration
 min_version = "2026.8.0"
+
+[settings]
+# Records resolved versions of the root [tools] table below into mise.lock.
+# Note this does NOT cover task-scoped `tools = { ... }`, which never reach the
+# lockfile -- those are pinned directly in the task instead, and
+# tools/validate-blueprint.py rejects "latest" there.
+lockfile = true
+
+# Tools configuration for the project
+[tools]
+# node = "22"
+# python = "3.13"
 
 [task_config]
 includes = ["tasks"]
-excludes = ["tasks/**/*.meta.toml"]
+excludes = [
+    "tasks/**/*.meta.toml"
+    # ,"tasks/ai"
+    # ,"tasks/dev"
+    # ,"tasks/docker"
+    # ,"tasks/network"
+    # ,"tasks/omarchy"
+    # ,"tasks/system"
+    ]
 
 [env]
-MISE_BLUEPRINT = "1"
+MISE_BLUEPRINT = "1.0"
+# MISE_VERBOSE = 1
+
+# Root-level task (not under tasks/) so it sorts first in `mise tasks ls`
+# and is quick to type: `mise run by-category <category>`.
+[tasks.by-category]
+description = "List mise tasks filtered by category prefix, e.g. system or omarchy"
+alias = "cat"
+file = "scripts/bash/tasks-by-category.sh"
+
+[_.tasks.by-category]
+icon = "list"
+risk = "low"
+enabled = true
+tags = ["tasks", "by-category"]
+category = "root"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+# `mise` alone shows mise's own built-in CLI help (not configurable), and a
+# task literally named "help" is shadowed by mise's built-in `help` subcommand
+# too, so this project entry point is named "menu" instead (alias: "h").
+# It lists categories rather than every task, since `mise tasks ls` already
+# dumps the full list and categories are the fastest way to narrow it down.
+[tasks.menu]
+description = "List task categories and how to filter tasks by one (project help)"
+alias = "h"
+file = "scripts/bash/menu.sh"
+
+[_.tasks.menu]
+icon = "help-circle"
+risk = "low"
+enabled = true
+tags = ["help", "menu", "categories"]
+category = "root"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
 
 # Exact custom metadata pattern.
 # Top-level "_" is an arbitrary-data namespace in normal mise config files.
-[tasks.hello]
-description = "Simple task demonstrating native task config plus arbitrary custom metadata"
-run = "echo hello"
+# [tasks.hello]
+# description = "Simple task demonstrating native task config plus arbitrary custom metadata"
+# run = "echo hello task"
 
-[_.tasks.hello]
-icon = "hand"
-risk = "low"
-anything_you_want = "test"
-enabled = true
-number = 123
-tags = ["example", "test"]
-category = "example"
+# [_.tasks.hello]
+# icon = "hand"
+# risk = "low"
+# anything_you_want = "test"
+# enabled = true
+# number = 123
+# tags = ["example", "test"]
+# category = "example"

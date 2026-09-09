@@ -1,40 +1,42 @@
-# Custom metadata sidecar.
-# This file is excluded from mise task discovery by task_config.excludes.
-# It deliberately uses the same [_.tasks.<name>] namespace supported
-# by normal mise config files, while remaining arbitrary TOML for our catalog.
+# Custom metadata sidecar for http.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
 
 [_.tasks."network:http:headers"]
 icon = "network"
 risk = "low"
 enabled = true
-number = 57
 tags = ["network", "http", "headers"]
 category = "network"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for network:http:headers"
+cwd_scope = "project"
 
 [_.tasks."network:http:json"]
 icon = "network"
 risk = "low"
 enabled = true
-number = 58
 tags = ["network", "http", "json"]
 category = "network"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for network:http:json"
+cwd_scope = "project"
 
 [_.tasks."network:http:weather"]
 icon = "network"
 risk = "low"
 enabled = true
-number = 59
 tags = ["network", "http", "weather"]
 category = "network"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for network:http:weather"
+cwd_scope = "project"

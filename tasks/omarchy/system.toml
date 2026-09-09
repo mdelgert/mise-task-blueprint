@@ -6,10 +6,6 @@ run = "omarchy commands"
 description = "List Omarchy CLI commands as JSON"
 run = "omarchy commands --json"
 
-["omarchy:debug"]
-description = "Print Omarchy debugging information"
-run = "omarchy debug"
-
 ["omarchy:update"]
 description = "Run the Omarchy update workflow"
 confirm = "Run the Omarchy system update workflow now?"

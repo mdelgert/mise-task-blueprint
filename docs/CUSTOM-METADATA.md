@@ -20,26 +20,32 @@ number = 123
 tags = ["example", "test"]
 ```
 
-The values under `_` are **your data**, not native mise task properties.
+The values under `_` are **your data**, not native mise task properties. Mise
+does not validate them, so `number = 123` and `anything_you_want = "test"` above
+are legal purely to demonstrate that arbitrary typed values survive the round
+trip. They are not part of this project's schema -- see
+[Required metadata schema](#required-metadata-schema) below.
 
 That means you can evolve metadata independently:
 
 ```toml
 [_.tasks.hello]
+# the project's required schema
 icon = "hand"
 risk = "low"
 enabled = true
-number = 123
-tags = ["example", "test"]
-
-category = "example"
+tags = ["example"]
+category = "root"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
+cwd_scope = "project"
 
-author = "Matthew"
+# anything else the product model needs
 documentation_url = "..."
 platforms = ["linux"]
+requires_network = false
 ```
 
 ## Critical difference: included task TOMLs
@@ -84,13 +90,13 @@ run = "docker ps"
 icon = "container"
 risk = "low"
 enabled = true
-number = 1
 tags = ["docker", "ps"]
 category = "docker"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for docker:ps"
+cwd_scope = "project"
 ```
 
 Root `mise.toml` excludes all metadata sidecars:
@@ -114,13 +120,13 @@ continues to see only real executable tasks.
 Bash wrapper:
 
 ```bash
-mise development:metadata:all:bash
+mise dev:metadata:all:bash
 ```
 
 Direct Python:
 
 ```bash
-mise development:metadata:all:python
+mise dev:metadata:all:python
 ```
 
 Both return a JSON object keyed by task name.
@@ -128,36 +134,45 @@ Both return a JSON object keyed by task name.
 ## Build future plugin-style catalog JSON
 
 ```bash
-mise development:catalog:json
+mise dev:catalog:json
 ```
 
 This performs:
 
 ```text
-mise tasks ls --json
+mise tasks ls --json          native task fields
         +
-all [_.tasks.*] sidecars
+mise tasks info <t> --json    typed arguments (usage_spec)
+        +
+all [_.tasks.*] sidecars      catalog metadata
         ↓
-merged JSON catalog
+versioned JSON catalog        schemas/catalog.schema.json
 ```
 
-The output keeps native mise fields separate from custom fields:
+The output is an envelope, not a bare array, so the shape can grow without
+breaking readers. Native mise fields stay separate from custom ones:
 
 ```json
-[
-  {
-    "name": "docker:ps",
-    "description": "List running Docker containers",
-    "...native mise fields...": "...",
-    "meta": {
-      "icon": "container",
-      "risk": "low",
-      "enabled": true,
-      "tags": ["docker", "ps"]
+{
+  "schema_version": 1,
+  "task_count": 120,
+  "tasks": [
+    {
+      "name": "docker:ps",
+      "description": "List running Docker containers",
+      "category": "docker",
+      "args": [],
+      "execution": { "command": ["mise", "run", "docker:ps"], "...": "..." },
+      "meta": { "icon": "container", "risk": "low", "...": "..." },
+      "mise": { "...raw native task object..." }
     }
-  }
-]
+  ]
+}
 ```
+
+The `execution` block exists because mise alone cannot tell a consumer whether a
+task needs a TTY, needs confirmation, or acts on the caller's directory. See
+`docs/PLUGIN-CONTRACT.md`.
 
 That is the intended boundary:
 
@@ -182,37 +197,73 @@ Those are not native mise task properties and can fail mise's task schema.
 Keep arbitrary fields under `_`.
 
 
-## Recommended baseline metadata schema
+## Required metadata schema
 
-For this blueprint, use these fields consistently unless a task has a strong reason not to:
+Ten fields are required on every task. `tools/validate-blueprint.py` fails the
+build if any is missing, mistyped, or holds a disallowed value, and
+`schemas/task-metadata.schema.json` is the machine-readable version.
 
 ```toml
 [_.tasks."category:group:action"]
-icon = "terminal"
-risk = "low"
-enabled = true
-number = 100
-tags = ["category", "group"]
-category = "category"
-destructive = false
-requires_sudo = false
-interactive = false
+icon = "terminal"           # string  -- icon hint for a UI
+risk = "low"                # enum    -- low | medium | high
+enabled = true              # bool    -- false hides it from the catalog
+tags = ["category", "group"] # [string] -- search/filter keywords
+category = "category"       # string  -- must equal the name prefix
+destructive = false         # bool    -- can irreversibly destroy state
+requires_confirm = false    # bool    -- mirrors the task's `confirm`
+requires_sudo = false       # bool    -- escalates privileges
+interactive = false         # bool    -- mirrors the task's `raw`/`interactive`
+cwd_scope = "project"       # enum    -- caller | project
 ```
 
-The schema is intentionally extensible, but new keys should be documented before becoming widespread.
+### Four fields are derived, not chosen
 
-Suggested risk values:
+These mirror the task definition and must agree with it:
 
-```text
-low
-medium
-high
-```
+| Field              | Must equal                                    |
+| ------------------ | --------------------------------------------- |
+| `category`         | the task name's prefix, or `root`             |
+| `requires_confirm` | whether the task has `confirm`                |
+| `interactive`      | whether the task has `raw` or `interactive`   |
+| `cwd_scope`        | `caller` if `dir = "{{cwd}}"`, else `project` |
 
-Suggested semantics:
+`requires_confirm` is the important one. Mise does not report `confirm` in *any*
+`--json` output, so this field is the only machine-readable signal that a task
+is gated. Nothing but the validator keeps it honest.
+
+### Consistency rules
+
+- `destructive = true` requires `requires_confirm = true` and `risk = "high"`.
+- `requires_sudo = true` cannot be `risk = "low"`.
+
+### Risk semantics
 
 - `low`: read-only or easily reversible
-- `medium`: changes local state, installs software, creates credentials/files, or talks to external systems
-- `high`: destructive, privilege-heavy, broad system modification, or difficult to reverse
+- `medium`: changes local state, installs software, creates credentials/files,
+  or talks to external systems
+- `high`: destructive, privilege-heavy, broad system modification, or difficult
+  to reverse
 
-`number` is an arbitrary numeric example field retained to prove typed metadata handling. It should not be treated as a ranking unless the project later defines that meaning.
+## Adding fields
+
+The schema is deliberately extensible; `additionalProperties` is allowed. To add
+a field:
+
+1. Add it to the sidecars that need it.
+2. Document it here.
+3. Add it to `schemas/task-metadata.schema.json`.
+4. If consumers should rely on it, add a rule to `tools/validate-blueprint.py`
+   so it cannot silently rot.
+
+Candidates the blueprint does not yet define:
+
+```toml
+platforms = ["linux"]
+requires_network = true
+docs = "https://..."
+```
+
+Do not add a field with no consumer and no meaning. Two such fields (`number`
+and `anything_you_want`) were carried on all 120 tasks before being removed --
+they cost real maintenance and told a reader nothing.

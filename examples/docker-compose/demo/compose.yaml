@@ -1,0 +1,12 @@
+# Small multi-service demo behind the docker:compose:demo:* tasks.
+# Run it from here with a bare `docker compose up -d`, or via mise.
+name: mise-compose-demo
+
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8088:80"
+
+  redis:
+    image: redis:alpine

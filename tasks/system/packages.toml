@@ -1,6 +1,6 @@
 ["system:pkg:install-core"]
 description = "Install baseline packages including ansible, nano, remmina, age, sops, curl, jq, Git, SSH and Docker"
-file = "../../scripts/bash/install-packages.sh"
+file = "scripts/bash/install-packages.sh"
 
 ["system:pkg:update"]
 description = "Update packages with the detected system package manager"
@@ -21,12 +21,12 @@ fi
 ["system:pkg:search"]
 description = "Search packages; pass a search term"
 dir = "{{cwd}}"
+usage = '''
+arg "<term>" help="Package name or keyword to search for"
+'''
+# Inline `run` bodies receive declared args as $usage_<name>, not as $1.
 run = '''
-term="${1:-}"
-if [[ -z "$term" ]]; then
-  echo "Usage: mise run system:pkg:search <term>" >&2
-  exit 2
-fi
+term="$usage_term"
 if command -v pacman >/dev/null 2>&1; then
   pacman -Ss "$term"
 elif command -v apt-cache >/dev/null 2>&1; then

@@ -1,76 +1,78 @@
-# Custom metadata sidecar.
-# This file is excluded from mise task discovery by task_config.excludes.
-# It deliberately uses the same [_.tasks.<name>] namespace supported
-# by normal mise config files, while remaining arbitrary TOML for our catalog.
+# Custom metadata sidecar for desktop.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
 
 [_.tasks."omarchy:hypr:monitors"]
 icon = "desktop"
 risk = "low"
 enabled = true
-number = 65
 tags = ["omarchy", "hypr", "monitors"]
 category = "omarchy"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for omarchy:hypr:monitors"
+cwd_scope = "project"
 
 [_.tasks."omarchy:hypr:clients"]
 icon = "desktop"
 risk = "low"
 enabled = true
-number = 66
 tags = ["omarchy", "hypr", "clients"]
 category = "omarchy"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for omarchy:hypr:clients"
+cwd_scope = "project"
 
 [_.tasks."omarchy:hypr:binds"]
 icon = "desktop"
 risk = "low"
 enabled = true
-number = 67
 tags = ["omarchy", "hypr", "binds"]
 category = "omarchy"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for omarchy:hypr:binds"
+cwd_scope = "project"
 
 [_.tasks."omarchy:hypr:devices"]
 icon = "desktop"
 risk = "low"
 enabled = true
-number = 68
 tags = ["omarchy", "hypr", "devices"]
 category = "omarchy"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for omarchy:hypr:devices"
+cwd_scope = "project"
 
 [_.tasks."omarchy:hypr:reload"]
 icon = "desktop"
 risk = "low"
 enabled = true
-number = 69
 tags = ["omarchy", "hypr", "reload"]
 category = "omarchy"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for omarchy:hypr:reload"
+cwd_scope = "project"
 
 [_.tasks."omarchy:screenshot"]
 icon = "desktop"
 risk = "low"
 enabled = true
-number = 70
 tags = ["omarchy", "screenshot"]
 category = "omarchy"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for omarchy:screenshot"
+cwd_scope = "project"

@@ -1,0 +1,66 @@
+# Custom metadata sidecar for github.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
+
+[_.tasks."dev:github:auth"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "github", "auth"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = true
+cwd_scope = "project"
+
+[_.tasks."dev:github:auth-status"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "github", "auth-status"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."dev:github:user"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "github", "user"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."dev:github:repo"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "github", "repo"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "caller"
+
+[_.tasks."dev:github:pat:help"]
+icon = "code"
+risk = "medium"
+enabled = true
+tags = ["dev", "github", "pat", "help"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"

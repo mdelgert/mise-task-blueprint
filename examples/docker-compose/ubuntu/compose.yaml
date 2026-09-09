@@ -1,0 +1,12 @@
+# Standalone ubuntu container behind the docker:compose:ubuntu:enter task.
+# Run it from here with a bare `docker compose up -d`, or via mise.
+name: mise-compose-ubuntu
+
+services:
+  ubuntu:
+    image: ubuntu:latest
+    # Base distro images exit immediately with no command; sleep keeps the
+    # container running so there is something to exec into.
+    command: sleep infinity
+    stdin_open: true
+    tty: true

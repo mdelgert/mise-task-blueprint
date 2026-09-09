@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+#USAGE arg "<container>" help="Container name or ID to open a shell in"
+
 container="${1:-}"
 if [[ -z "$container" ]]; then
   echo "Usage: mise run docker:container:shell <container>" >&2

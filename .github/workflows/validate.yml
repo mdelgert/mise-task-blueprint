@@ -1,0 +1,47 @@
+name: validate
+
+on:
+  # push:
+  #   branches: [main, dev]
+  # pull_request:
+  # workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # Installed here rather than via mise so the validator's shellcheck layer
+      # actually runs in CI. Locally it reports "not installed" and is skipped.
+      - name: Install shellcheck
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck
+
+      - name: Install mise
+        uses: jdx/mise-action@v4
+        with:
+          # Must satisfy min_version in mise.toml.
+          version: 2026.9.1
+          # Tasks declare their own runtimes via `tools`; nothing to install yet.
+          install: false
+          cache: true
+
+      - name: Task and metadata gate
+        # mise tasks validate + full metadata schema and invariant validation.
+        run: mise run dev:blueprint:ci
+
+      - name: Catalog schema conformance
+        run: |
+          # The task runs under mise's Python 3.14, not the runner's system
+          # python3, so jsonschema must be installed into that interpreter or
+          # the check would skip. The :strict variant fails rather than skips.
+          mise exec python@3.14 -- python -m pip install --quiet jsonschema
+          mise run dev:blueprint:schema:strict
+
+      - name: Task list smoke test
+        run: |
+          mise tasks ls
+          mise run dev:catalog:json > /dev/null

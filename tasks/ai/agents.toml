@@ -1,0 +1,23 @@
+# These launch full-screen interactive agent TUIs, so each needs `raw = true`
+# to hand the terminal straight to the child process (same as dev:github:auth
+# and docker:container:shell). Each also runs the agent with its approval /
+# permission prompts disabled, which is effectively unattended command
+# execution, so each carries an explicit `confirm`.
+
+["ai:claude"]
+description = "Run Claude AI agent with dangerously skip permissions enabled"
+raw = true
+confirm = "Run Claude with ALL permission prompts disabled?"
+run = "claude --dangerously-skip-permissions"
+
+["ai:copilot"]
+description = "Run Copilot AI agent with full permissions"
+raw = true
+confirm = "Run Copilot with ALL tools allowed?"
+run = "copilot --allow-all-tools"
+
+["ai:codex"]
+description = "Run Codex AI agent with full permissions"
+raw = true
+confirm = "Run Codex with approvals and sandbox bypassed?"
+run = "codex --dangerously-bypass-approvals-and-sandbox"

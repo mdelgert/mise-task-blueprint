@@ -1,88 +1,90 @@
-# Custom metadata sidecar.
-# This file is excluded from mise task discovery by task_config.excludes.
-# It deliberately uses the same [_.tasks.<name>] namespace supported
-# by normal mise config files, while remaining arbitrary TOML for our catalog.
+# Custom metadata sidecar for info.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
 
 [_.tasks."system:info"]
 icon = "computer"
 risk = "low"
 enabled = true
-number = 80
 tags = ["system", "info"]
 category = "system"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for system:info"
+cwd_scope = "project"
 
 [_.tasks."system:uptime"]
 icon = "computer"
 risk = "low"
 enabled = true
-number = 81
 tags = ["system", "uptime"]
 category = "system"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for system:uptime"
+cwd_scope = "project"
 
 [_.tasks."system:memory"]
 icon = "computer"
 risk = "low"
 enabled = true
-number = 82
 tags = ["system", "memory"]
 category = "system"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for system:memory"
+cwd_scope = "project"
 
 [_.tasks."system:disk"]
 icon = "computer"
 risk = "low"
 enabled = true
-number = 83
 tags = ["system", "disk"]
 category = "system"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for system:disk"
+cwd_scope = "project"
 
 [_.tasks."system:block-devices"]
 icon = "computer"
 risk = "low"
 enabled = true
-number = 84
 tags = ["system", "block-devices"]
 category = "system"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for system:block-devices"
+cwd_scope = "project"
 
 [_.tasks."system:processes"]
 icon = "computer"
 risk = "low"
 enabled = true
-number = 85
 tags = ["system", "processes"]
 category = "system"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for system:processes"
+cwd_scope = "project"
 
 [_.tasks."system:environment"]
 icon = "computer"
 risk = "low"
 enabled = true
-number = 86
 tags = ["system", "environment"]
 category = "system"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for system:environment"
+cwd_scope = "project"

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+#USAGE arg "<container>" help="Container name or ID"
+#USAGE arg "[lines]" help="Number of log lines to show" default="200"
+
 container="${1:-}"
 lines="${2:-200}"
 

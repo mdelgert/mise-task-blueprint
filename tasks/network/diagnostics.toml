@@ -8,17 +8,16 @@ run = "ping -c 4 google.com"
 
 ["network:public-ip"]
 description = "Show the current public IP using ipify"
-tools = { curl = "latest" }
 run = "curl -fsSL https://api.ipify.org && printf '\n'"
 
 ["network:trace"]
 description = "Trace route to a host; pass host name or IP"
+usage = '''
+arg "<host>" help="Host name or IP address to trace a route to"
+'''
+# Inline `run` bodies receive declared args as $usage_<name>, not as $1.
 run = '''
-host="${1:-}"
-if [[ -z "$host" ]]; then
-  echo "Usage: mise run network:trace <host>" >&2
-  exit 2
-fi
+host="$usage_host"
 if command -v traceroute >/dev/null 2>&1; then
   traceroute "$host"
 elif command -v tracepath >/dev/null 2>&1; then

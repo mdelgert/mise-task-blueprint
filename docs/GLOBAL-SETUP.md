@@ -29,9 +29,28 @@ includes = [
   "{{env.HOME}}/.config/mise/tasks",
   "{{env.HOME}}/Source/private/mise-task-blueprint/tasks",
 ]
+excludes = [
+  "{{env.HOME}}/Source/private/mise-task-blueprint/tasks/**/*.meta.toml",
+]
 ```
 
 Important: setting `task_config.includes` replaces the default file-task directories for that config scope. The first entry above deliberately preserves the normal user-global task directory.
+
+**`excludes` is not optional.** Metadata sidecars live beside the task files, and
+mise's included-task schema treats every root key as a task. Omit the exclude and
+mise fails on the first sidecar with `unknown field \`tasks\`` and loads **zero**
+tasks:
+
+```
+mise ERROR Error parsing task file: .../tasks/docker/compose.meta.toml
+mise ERROR TOML parse error at line 8, column 2
+  | [_.tasks."docker:compose:config"]
+  |  ^ unknown field `tasks`
+```
+
+Unlike the repository-local `mise.toml`, where `"tasks/**/*.meta.toml"` is
+relative to the config, a global exclude must be **fully qualified against the
+same root as the include**. A bare `"**/*.meta.toml"` silently matches nothing.
 
 Now from anywhere:
 
@@ -72,7 +91,7 @@ mise tasks ls --json
 
 ```text
 ~/Source/private/
-└── omarchy-tasks/
+└── mise-task-blueprint/
     ├── mise.toml
     ├── tasks/
     ├── scripts/
@@ -80,4 +99,4 @@ mise tasks ls --json
     └── skills/
 ```
 
-Then update the global include path accordingly.
+Then update both the include **and** the exclude path accordingly.

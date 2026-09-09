@@ -1,0 +1,42 @@
+# Custom metadata sidecar for agents.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
+
+[_.tasks."ai:claude"]
+icon = "robot"
+risk = "high"
+enabled = true
+tags = ["ai", "claude", "agent"]
+category = "ai"
+destructive = true
+requires_confirm = true
+requires_sudo = false
+interactive = true
+cwd_scope = "project"
+
+[_.tasks."ai:copilot"]
+icon = "robot"
+risk = "high"
+enabled = true
+tags = ["ai", "copilot", "agent"]
+category = "ai"
+destructive = true
+requires_confirm = true
+requires_sudo = false
+interactive = true
+cwd_scope = "project"
+
+[_.tasks."ai:codex"]
+icon = "robot"
+risk = "high"
+enabled = true
+tags = ["ai", "codex", "agent"]
+category = "ai"
+destructive = true
+requires_confirm = true
+requires_sudo = false
+interactive = true
+cwd_scope = "project"

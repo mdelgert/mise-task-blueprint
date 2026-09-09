@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+#USAGE arg "<unit>" help="systemd unit name, e.g. sshd or NetworkManager"
+#USAGE arg "[lines]" help="Number of journal lines to show" default="200"
+
 unit="${1:-}"
 lines="${2:-200}"
 

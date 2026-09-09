@@ -1,0 +1,126 @@
+# Custom metadata sidecar for runtimes.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
+
+[_.tasks."dev:python:version"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "python", "version"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."dev:python:hello"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "python", "hello"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."dev:node:version"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "node", "version"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."dev:node:hello"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "node", "hello"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."dev:metadata:bash"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "metadata", "bash"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."dev:metadata:python"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "metadata", "python"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."dev:metadata:all:bash"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "metadata", "all", "bash"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."dev:metadata:all:python"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "metadata", "all", "python"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."dev:catalog:json"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "catalog", "json"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."dev:metadata:node"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "metadata", "node"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"

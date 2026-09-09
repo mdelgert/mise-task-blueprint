@@ -1,0 +1,54 @@
+# Custom metadata sidecar for diag.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
+
+[_.tasks."system:diag"]
+icon = "terminal"
+risk = "low"
+enabled = true
+tags = ["system", "diag"]
+category = "system"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."system:diag:bash"]
+icon = "terminal"
+risk = "low"
+enabled = true
+tags = ["system", "diag", "bash"]
+category = "system"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."system:diag:python"]
+icon = "terminal"
+risk = "low"
+enabled = true
+tags = ["system", "diag", "python"]
+category = "system"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
+
+[_.tasks."system:diag:node"]
+icon = "terminal"
+risk = "low"
+enabled = true
+tags = ["system", "diag", "node"]
+category = "system"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"

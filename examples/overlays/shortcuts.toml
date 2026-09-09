@@ -1,0 +1,39 @@
+# Personal shortcut overlay -- NOT part of the blueprint task catalog.
+#
+# These tasks hard-code local paths and a specific repository, so they live here
+# instead of tasks/ to keep the blueprint generic and its categories aligned with
+# docs/TASK-NAMING.md.
+#
+# To use them, copy this file into your own config and adjust the paths:
+#
+#   cp examples/overlays/shortcuts.toml ~/.config/mise/tasks/shortcuts.toml
+#
+# Note: "script:meta" references scripts/bash/read-meta.sh from this repository.
+# Point it at an absolute path, or use the supported blueprint equivalents:
+#
+#   mise dev:metadata:all:python
+#   mise dev:catalog:json
+
+# Shortcuts for opening repositories in VSCode
+["code:mise"]
+description = "VSCODE open mise repository"
+run = "code ."
+
+["code:home"]
+description = "VSCODE open home repository"
+run = "code ~/"
+
+# Shortcuts for opening websites in the default browser
+["browser:google"]
+description = "Open Google in the default browser"
+run = "xdg-open https://www.google.com"
+
+["browser:github"]
+description = "Open GitHub repo in the default browser"
+run = "xdg-open https://github.com/mdelgert/mise-task-blueprint"
+
+# Shortcuts to run common scripts
+["script:meta"]
+alias = "meta"
+description = "Print every mise task as JSON merged with its custom [_.tasks.*] metadata"
+run = "scripts/bash/read-meta.sh"

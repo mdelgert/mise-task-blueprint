@@ -1,0 +1,27 @@
+["dev:blueprint:validate"]
+description = "Validate task syntax, metadata schema and task-to-metadata invariants"
+tools = { python = "3.14" }
+run = "python tools/validate-blueprint.py"
+
+# The gate CI runs.
+["dev:blueprint:ci"]
+description = "Full CI gate: mise task validation plus metadata schema and invariants"
+tools = { python = "3.14" }
+run = [
+  "mise tasks validate",
+  "python tools/validate-blueprint.py",
+]
+
+# Requires `jsonschema`; skips cleanly when it is not installed. Install it into
+# the same interpreter this task uses:
+#   mise exec python@3.14 -- python -m pip install jsonschema
+["dev:blueprint:schema"]
+description = "Check the generated catalog against schemas/ so the contract cannot drift"
+tools = { python = "3.14" }
+run = "python tools/check-catalog-schema.py"
+
+# Same check, but a missing jsonschema is a hard failure instead of a skip.
+["dev:blueprint:schema:strict"]
+description = "Catalog schema conformance that fails instead of skipping when jsonschema is absent"
+tools = { python = "3.14" }
+run = "python tools/check-catalog-schema.py --require"

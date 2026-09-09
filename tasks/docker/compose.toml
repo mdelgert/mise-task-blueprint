@@ -47,17 +47,39 @@ run = "docker compose restart"
 
 ["docker:compose:demo:up"]
 description = "Start the included nginx + redis Compose demo"
-run = "docker compose -f examples/docker-compose/compose.yaml up -d"
+run = "docker compose -f examples/docker-compose/demo/compose.yaml up -d"
 
 ["docker:compose:demo:ps"]
 description = "Show status of the included Compose demo"
-run = "docker compose -f examples/docker-compose/compose.yaml ps"
+run = "docker compose -f examples/docker-compose/demo/compose.yaml ps"
 
 ["docker:compose:demo:logs"]
 description = "Follow logs from the included Compose demo"
 raw = true
-run = "docker compose -f examples/docker-compose/compose.yaml logs -f"
+run = "docker compose -f examples/docker-compose/demo/compose.yaml logs -f"
 
 ["docker:compose:demo:down"]
 description = "Stop/remove the included Compose demo"
-run = "docker compose -f examples/docker-compose/compose.yaml down"
+run = "docker compose -f examples/docker-compose/demo/compose.yaml down"
+
+# Single-distro Compose demos. Each has its own Compose file and project, so
+# entering one never starts or stops the other. The service runs
+# `sleep infinity` so the container stays alive to be entered.
+
+["docker:compose:ubuntu:enter"]
+description = "Start the Ubuntu (latest) Compose container and open a shell inside it"
+raw = true
+run = "scripts/bash/compose-distro-enter.sh ubuntu"
+
+["docker:compose:ubuntu:down"]
+description = "Stop/remove the Ubuntu Compose container"
+run = "docker compose -f examples/docker-compose/ubuntu/compose.yaml down"
+
+["docker:compose:debian:enter"]
+description = "Start the Debian (latest) Compose container and open a shell inside it"
+raw = true
+run = "scripts/bash/compose-distro-enter.sh debian"
+
+["docker:compose:debian:down"]
+description = "Stop/remove the Debian Compose container"
+run = "docker compose -f examples/docker-compose/debian/compose.yaml down"

@@ -1,0 +1,78 @@
+# Custom metadata sidecar for git.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
+
+[_.tasks."dev:git:status"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "git", "status"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "caller"
+
+[_.tasks."dev:git:log"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "git", "log"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "caller"
+
+[_.tasks."dev:git:branches"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "git", "branches"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "caller"
+
+[_.tasks."dev:git:remotes"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "git", "remotes"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "caller"
+
+[_.tasks."dev:git:tag"]
+icon = "code"
+risk = "medium"
+enabled = true
+tags = ["dev", "git", "tag"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "caller"
+
+[_.tasks."dev:git:tags:all"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "git", "tags", "all"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "caller"

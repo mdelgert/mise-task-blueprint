@@ -1,52 +1,54 @@
-# Custom metadata sidecar.
-# This file is excluded from mise task discovery by task_config.excludes.
-# It deliberately uses the same [_.tasks.<name>] namespace supported
-# by normal mise config files, while remaining arbitrary TOML for our catalog.
+# Custom metadata sidecar for diagnostics.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
 
 [_.tasks."network:ping-cloudflare"]
 icon = "network"
 risk = "low"
 enabled = true
-number = 53
 tags = ["network", "ping-cloudflare"]
 category = "network"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for network:ping-cloudflare"
+cwd_scope = "project"
 
 [_.tasks."network:ping-google"]
 icon = "network"
 risk = "low"
 enabled = true
-number = 54
 tags = ["network", "ping-google"]
 category = "network"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for network:ping-google"
+cwd_scope = "project"
 
 [_.tasks."network:public-ip"]
 icon = "network"
 risk = "low"
 enabled = true
-number = 55
 tags = ["network", "public-ip"]
 category = "network"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for network:public-ip"
+cwd_scope = "project"
 
 [_.tasks."network:trace"]
 icon = "network"
 risk = "medium"
 enabled = true
-number = 56
 tags = ["network", "trace"]
 category = "network"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
-anything_you_want = "custom metadata for network:trace"
+cwd_scope = "project"

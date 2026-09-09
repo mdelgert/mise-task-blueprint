@@ -11,7 +11,7 @@ tasks/
 ├── system/
 ├── network/
 ├── docker/
-├── development/
+├── dev/
 └── omarchy/
 ```
 
@@ -47,8 +47,13 @@ Adjacent custom metadata:
 icon = "container"
 risk = "low"
 enabled = true
-number = 100
 tags = ["docker", "containers"]
+category = "docker"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
 ```
 
 This preserves strict mise task validation while allowing the project to add any catalog fields it needs.
@@ -90,7 +95,7 @@ Use Bash/Python/Node when the implementation has branches, loops, platform detec
 ```toml
 ["system:pkg:install-core"]
 description = "Install the baseline package set"
-file = "../../scripts/bash/install-packages.sh"
+file = "scripts/bash/install-packages.sh"
 ```
 
 Keep the task definition declarative and the implementation testable.
@@ -98,13 +103,21 @@ Keep the task definition declarative and the implementation testable.
 ## 7. Declare task-specific runtimes with mise
 
 ```toml
-["development:metadata:python"]
+["dev:metadata:python"]
 description = "Return task metadata as JSON"
 tools = { python = "3.14" }
-file = "../../scripts/python/task_metadata.py"
+file = "scripts/python/task_metadata.py"
 ```
 
 Avoid requiring users to manually install a particular runtime version when mise can provision it.
+
+Always pin a version. `lockfile = true` records only the root `[tools]` table --
+task-scoped tools never reach `mise.lock`, so `"latest"` there is unpinned and
+drifts. The validator rejects it.
+
+And only declare what mise can provide: `curl` is absent from mise's registry,
+so `tools = { curl = "latest" }` warns on every run and quietly uses the system
+binary instead. That belongs in rule 8 below.
 
 ## 8. Use the OS package manager for OS-integrated software
 
@@ -117,7 +130,7 @@ Use mise primarily for developer runtimes and CLI tools where its backend model 
 Examples:
 
 ```toml
-["development:git:status"]
+["dev:git:status"]
 dir = "{{cwd}}"
 run = "git status"
 ```
@@ -155,33 +168,40 @@ Metadata should describe behavior, not contain credentials.
 
 ## 12. Treat metadata keys as a project schema
 
-Arbitrary means extensible, not random.
-
-A useful baseline:
+Arbitrary means extensible, not random. Ten fields are required and validated:
 
 ```toml
 [_.tasks."example:task"]
 icon = "terminal"
 risk = "low"
 enabled = true
-number = 100
 tags = ["example"]
 category = "example"
 destructive = false
+requires_confirm = false
 requires_sudo = false
 interactive = false
+cwd_scope = "project"
 ```
+
+Four of them mirror the task definition and are checked against it:
+`category`, `requires_confirm`, `interactive`, `cwd_scope`.
+
+`requires_confirm` earns its place: mise never reports a task's `confirm` in any
+`--json` output, so this is the only machine-readable signal that a task is
+gated. Without a validator rule it would just be a comment.
 
 Future fields can be added deliberately:
 
 ```toml
 platforms = ["linux"]
 requires_network = true
-author = "..."
 docs = "..."
 ```
 
-Document new fields in `docs/CUSTOM-METADATA.md`.
+Document new fields in `docs/CUSTOM-METADATA.md` and add them to
+`schemas/task-metadata.schema.json`. Do not add a field with no consumer -- a
+field nothing reads is maintenance cost that teaches a reader nothing.
 
 ## 13. Validate task ↔ metadata parity
 
@@ -190,16 +210,21 @@ Every public task should have matching metadata.
 The included validator checks:
 
 - TOML syntax
-- duplicate/missing tasks
+- duplicate/missing tasks and orphan sidecars
 - task-to-metadata mapping
-- referenced script existence
-- Bash syntax
-- Python syntax
+- required metadata fields, types and allowed values
+- metadata that contradicts the task it describes
+- `destructive` implies `confirm` and `risk = "high"`
+- arguments declared for every task that reads them
+- referenced script existence (resolved from the project root)
+- Bash syntax, plus shellcheck when installed
+- Python and Node syntax
+- task-scoped `tools` pinned to a version rather than `"latest"`
 
 Run:
 
 ```bash
-python tools/validate-blueprint.py
+mise run dev:blueprint:validate
 ```
 
 Then:
@@ -207,7 +232,14 @@ Then:
 ```bash
 mise tasks validate
 mise tasks ls
-mise tasks ls --json
+mise dev:catalog:json
+```
+
+And, with `jsonschema` installed, confirm the published contract still matches
+its own schema:
+
+```bash
+mise run dev:blueprint:schema
 ```
 
 ## 14. Keep the CLI useful without a plugin
