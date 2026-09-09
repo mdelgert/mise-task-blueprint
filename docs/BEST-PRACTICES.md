@@ -90,7 +90,7 @@ Use Bash/Python/Node when the implementation has branches, loops, platform detec
 ```toml
 ["system:pkg:install-core"]
 description = "Install the baseline package set"
-file = "../../scripts/bash/install-packages.sh"
+file = "scripts/bash/install-packages.sh"
 ```
 
 Keep the task definition declarative and the implementation testable.
@@ -101,7 +101,7 @@ Keep the task definition declarative and the implementation testable.
 ["dev:metadata:python"]
 description = "Return task metadata as JSON"
 tools = { python = "3.14" }
-file = "../../scripts/python/task_metadata.py"
+file = "scripts/python/task_metadata.py"
 ```
 
 Avoid requiring users to manually install a particular runtime version when mise can provision it.

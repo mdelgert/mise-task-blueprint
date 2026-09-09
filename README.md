@@ -86,7 +86,7 @@ mise-task-blueprint/
 │   ├── docker-compose/
 │   └── global-config.toml
 ├── skills/
-│   └── mise-recipe-authoring/
+│   └── mise-task-authoring/
 │       └── SKILL.md
 └── tools/
     └── validate-blueprint.py
@@ -136,7 +136,7 @@ For script-backed tasks:
 ```toml
 ["system:logs:unit"]
 description = "Show recent logs for a systemd unit"
-file = "../../scripts/bash/logs-unit.sh"
+file = "scripts/bash/logs-unit.sh"
 ```
 
 Do not invent arbitrary mise task keys such as `risk`, `tags`, or `category` until you deliberately add a separate plugin metadata schema.
@@ -288,11 +288,11 @@ These demonstrate the important mise pattern:
 ```toml
 ["dev:python:hello"]
 tools = { python = "3.14" }
-file = "../../scripts/python/task_metadata.py"
+file = "scripts/python/task_metadata.py"
 
 ["dev:node:hello"]
 tools = { node = "24" }
-file = "../../scripts/node/hello.mjs"
+file = "scripts/node/hello.mjs"
 ```
 
 The host doesn't need those particular Python/Node versions installed through its OS package manager first; mise resolves/activates the requested runtime for the task.

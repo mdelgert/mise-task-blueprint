@@ -25,7 +25,7 @@ Example:
 ```toml
 ["system:pkg:install-core"]
 description = "Install the baseline package set"
-file = "../../scripts/bash/install-packages.sh"
+file = "scripts/bash/install-packages.sh"
 ```
 
 ## Public naming
@@ -126,18 +126,24 @@ For an included task file such as:
 tasks/system/logs.toml
 ```
 
-mise resolves a relative `file =` path from the directory containing that included TOML file.
+mise resolves a relative `file =` path from the project root (the directory containing the root `mise.toml`), **not** from the directory containing the included TOML file.
 
 Therefore this blueprint uses:
-
-```toml
-file = "../../scripts/bash/logs-unit.sh"
-```
-
-not:
 
 ```toml
 file = "scripts/bash/logs-unit.sh"
 ```
 
-This is intentionally different from a task declared directly in the root `mise.toml`, where `scripts/...` would be relative to the root config file.
+not:
+
+```toml
+file = "../../scripts/bash/logs-unit.sh"
+```
+
+Included task files and tasks declared directly in the root `mise.toml` therefore use the identical path. Confirm with:
+
+```bash
+mise tasks info system:logs:unit
+```
+
+`tools/validate-blueprint.py` enforces this by resolving every `file =` against the project root.

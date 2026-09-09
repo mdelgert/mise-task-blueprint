@@ -2,21 +2,26 @@
 description = "Run mise diagnostic task"
 run = '''
 mise --version
-node --version
-python --version
+# node/python are not declared as `tools` here on purpose: this task reports on
+# whatever the host has. Without the `|| echo` guards mise's `set -e` run shell
+# would abort here and never print the MISE_* values below.
+node --version || echo "node: not installed"
+python --version || echo "python: not installed"
 echo "MISE_PROJECT_ROOT=$MISE_PROJECT_ROOT"
 echo "MISE_CONFIG_ROOT=$MISE_CONFIG_ROOT"
 echo "MISE_ORIGINAL_CWD=$MISE_ORIGINAL_CWD"
 '''
 
 ["system:diag:bash"]
-description = "Run bash script"
+description = "Run the hello-bash.sh sample script"
 run = "scripts/bash/hello-bash.sh"
 
 ["system:diag:python"]
-description = "Run python script"
+description = "Run the hello-python.py sample script on a mise-managed Python"
+tools = { python = "3.14" }
 run = "python scripts/python/hello-python.py"
 
 ["system:diag:node"]
-description = "Run node script"
+description = "Run the hello-node.mjs sample script on a mise-managed Node"
+tools = { node = "24" }
 run = "node scripts/node/hello-node.mjs"

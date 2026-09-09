@@ -6,8 +6,21 @@ command -v jq >/dev/null || {
   exit 1
 }
 
+root="${MISE_PROJECT_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
+
 tasks_json="$(mise tasks --json)"
-metadata_toml="$(mise config get _.tasks 2>/dev/null || true)"
+
+# Metadata lives in two places:
+#   1. the root mise.toml [_.tasks.*] table, readable via `mise config get`
+#   2. tasks/**/*.meta.toml sidecars, which task_config.excludes keeps out of
+#      mise entirely, so they must be read straight off disk
+metadata_toml="$(
+  mise config get _.tasks 2>/dev/null || true
+  while IFS= read -r meta_file; do
+    printf '\n'
+    cat "$meta_file"
+  done < <(find "$root/tasks" -name '*.meta.toml' -type f | sort)
+)"
 
 metadata_json='{}'
 current_task=''
@@ -17,9 +30,16 @@ while IFS= read -r line; do
   [[ -z "${line//[[:space:]]/}" ]] && continue
   [[ "$line" =~ ^[[:space:]]*# ]] && continue
 
-  # [hello]
-  if [[ "$line" =~ ^\[([^]]+)\]$ ]]; then
+  # Table headers arrive in two shapes:
+  #   [hello]                     from `mise config get _.tasks`
+  #   [_.tasks."dev:git:status"]  from a *.meta.toml sidecar
+  # Any name containing a colon is emitted quoted, so the quotes must be
+  # stripped or the name never matches the task name in `mise tasks --json`.
+  if [[ "$line" =~ ^\[(.+)\]$ ]]; then
     current_task="${BASH_REMATCH[1]}"
+    current_task="${current_task#_.tasks.}"
+    current_task="${current_task#\"}"
+    current_task="${current_task%\"}"
 
     metadata_json="$(
       jq \

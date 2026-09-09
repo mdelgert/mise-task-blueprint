@@ -23,6 +23,15 @@ if [[ "$output" == "$input" ]]; then
   exit 1
 fi
 
+# `age -o` clobbers an existing file without asking, so decrypting foo.txt.age
+# next to a locally edited foo.txt would destroy it. Match the "Refusing to
+# overwrite" convention used by age-keygen.sh and ssh-keygen.sh instead.
+if [[ -e "$output" ]]; then
+  echo "Refusing to overwrite existing file: $output" >&2
+  echo "Remove it or pass a different output path." >&2
+  exit 1
+fi
+
 if [[ ! -f "$identity" ]]; then
   echo "No age identity found at: $identity" >&2
   echo "Generate one first: mise run dev:age:keygen" >&2

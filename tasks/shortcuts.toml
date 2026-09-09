@@ -19,5 +19,5 @@ run = "xdg-open https://github.com/mdelgert/mise-task-blueprint"
 # Shortcuts to run common scripts
 ["script:meta"]
 alias = "meta"
-description = "Run meta"
+description = "Print every mise task as JSON merged with its custom [_.tasks.*] metadata"
 run = "scripts/bash/read-meta.sh"
