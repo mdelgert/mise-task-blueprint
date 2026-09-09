@@ -1,0 +1,14 @@
+# Run Claude with dangerously skip permissions enabled
+["ai:claude"]
+description = "Run Claude AI agent with dangerously skip permissions enabled"
+run = "claude --dangerously-skip-permissions"
+
+# Run copilot with full permissions
+["ai:copilot"]
+description = "Run Copilot AI agent with full permissions"
+run = "copilot --allow-all-tools"
+
+# Run codex with full permissions
+["ai:codex"]
+description = "Run Codex AI agent with full permissions"
+run = "codex --dangerously-bypass-approvals-and-sandbox"
