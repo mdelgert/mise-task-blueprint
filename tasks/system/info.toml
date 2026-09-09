@@ -1,0 +1,38 @@
+["system:info"]
+description = "Show kernel, OS and machine information"
+run = [
+  "uname -a",
+  "printf '\n--- OS release ---\n'",
+  "cat /etc/os-release 2>/dev/null || true",
+]
+
+["system:uptime"]
+description = "Show uptime and load averages"
+run = "uptime"
+
+["system:memory"]
+description = "Show memory usage"
+run = "free -h"
+
+["system:disk"]
+description = "Show filesystem disk usage"
+run = "df -hT"
+
+["system:block-devices"]
+description = "Show block devices and filesystems"
+run = "lsblk -f"
+
+["system:processes"]
+description = "Show top processes by CPU usage"
+run = "ps aux --sort=-%cpu | head -n 16"
+
+["system:environment"]
+description = "Show selected non-secret environment and mise context"
+run = '''
+printf 'USER=%s\n' "${USER:-}"
+printf 'HOME=%s\n' "${HOME:-}"
+printf 'SHELL=%s\n' "${SHELL:-}"
+printf 'PWD=%s\n' "$PWD"
+printf 'MISE_PROJECT_ROOT=%s\n' "${MISE_PROJECT_ROOT:-}"
+printf 'MISE_ORIGINAL_CWD=%s\n' "${MISE_ORIGINAL_CWD:-}"
+'''

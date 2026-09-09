@@ -1,0 +1,25 @@
+["omarchy:commands"]
+description = "List documented Omarchy CLI commands"
+run = "omarchy commands"
+
+["omarchy:commands:json"]
+description = "List Omarchy CLI commands as JSON"
+run = "omarchy commands --json"
+
+["omarchy:debug"]
+description = "Print Omarchy debugging information"
+run = "omarchy debug"
+
+["omarchy:update"]
+description = "Run the Omarchy update workflow"
+confirm = "Run the Omarchy system update workflow now?"
+raw = true
+run = "omarchy update"
+
+["omarchy:theme:list"]
+description = "List Omarchy themes"
+run = "omarchy theme list"
+
+["omarchy:font:list"]
+description = "List Omarchy fonts"
+run = "omarchy font list"

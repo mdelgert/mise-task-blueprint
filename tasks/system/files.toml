@@ -1,0 +1,13 @@
+["system:files:largest-home"]
+description = "Show the 20 largest files under the current user's home directory"
+run = "find \"$HOME\" -type f -printf '%s %p\\n' 2>/dev/null | sort -nr | head -n 20 | numfmt --field=1 --to=iec"
+
+["system:files:cwd-size"]
+description = "Show disk usage for items in the current directory"
+dir = "{{cwd}}"
+run = "du -sh .[^.]* * 2>/dev/null | sort -h"
+
+["system:files:find-large"]
+description = "Find files larger than 1 GiB under the current directory"
+dir = "{{cwd}}"
+run = "find . -type f -size +1G -printf '%s %p\\n' 2>/dev/null | sort -nr | numfmt --field=1 --to=iec"

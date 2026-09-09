@@ -1,0 +1,11 @@
+["system:services:failed"]
+description = "Show failed systemd services"
+run = "systemctl --failed --no-pager"
+
+["system:services:running"]
+description = "Show running systemd services"
+run = "systemctl list-units --type=service --state=running --no-pager"
+
+["system:services:user-running"]
+description = "Show running user systemd services"
+run = "systemctl --user list-units --type=service --state=running --no-pager"

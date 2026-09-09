@@ -1,0 +1,30 @@
+["network:ping-cloudflare"]
+description = "Ping Cloudflare DNS to test raw IP connectivity"
+run = "ping -c 4 1.1.1.1"
+
+["network:ping-google"]
+description = "Ping google.com to test DNS plus connectivity"
+run = "ping -c 4 google.com"
+
+["network:public-ip"]
+description = "Show the current public IP using ipify"
+tools = { curl = "latest" }
+run = "curl -fsSL https://api.ipify.org && printf '\n'"
+
+["network:trace"]
+description = "Trace route to a host; pass host name or IP"
+run = '''
+host="${1:-}"
+if [[ -z "$host" ]]; then
+  echo "Usage: mise run network:trace <host>" >&2
+  exit 2
+fi
+if command -v traceroute >/dev/null 2>&1; then
+  traceroute "$host"
+elif command -v tracepath >/dev/null 2>&1; then
+  tracepath "$host"
+else
+  echo "Install traceroute or tracepath first." >&2
+  exit 1
+fi
+'''

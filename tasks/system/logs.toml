@@ -1,0 +1,20 @@
+["system:logs:boot"]
+description = "Show recent logs from the current boot"
+run = "journalctl -b --no-pager -n 200"
+
+["system:logs:boot-errors"]
+description = "Show error-priority logs from the current boot"
+run = "journalctl -b -p err --no-pager"
+
+["system:logs:kernel"]
+description = "Show recent kernel logs"
+run = "journalctl -k --no-pager -n 200"
+
+["system:logs:unit"]
+description = "Show recent logs for a systemd unit; pass unit name and optional line count"
+file = "../../scripts/bash/logs-unit.sh"
+
+["system:logs:follow"]
+description = "Follow the live system journal"
+raw = true
+run = "journalctl -f"

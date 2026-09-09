@@ -1,0 +1,52 @@
+# Custom metadata sidecar.
+# This file is excluded from mise task discovery by task_config.excludes.
+# It deliberately uses the same [_.tasks.<name>] namespace supported
+# by normal mise config files, while remaining arbitrary TOML for our catalog.
+
+[_.tasks."development:git:status"]
+icon = "code"
+risk = "low"
+enabled = true
+number = 1
+tags = ["development", "git", "status"]
+category = "development"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for development:git:status"
+
+[_.tasks."development:git:log"]
+icon = "code"
+risk = "low"
+enabled = true
+number = 2
+tags = ["development", "git", "log"]
+category = "development"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for development:git:log"
+
+[_.tasks."development:git:branches"]
+icon = "code"
+risk = "low"
+enabled = true
+number = 3
+tags = ["development", "git", "branches"]
+category = "development"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for development:git:branches"
+
+[_.tasks."development:git:remotes"]
+icon = "code"
+risk = "low"
+enabled = true
+number = 4
+tags = ["development", "git", "remotes"]
+category = "development"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for development:git:remotes"

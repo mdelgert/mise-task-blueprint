@@ -1,0 +1,76 @@
+# Custom metadata sidecar.
+# This file is excluded from mise task discovery by task_config.excludes.
+# It deliberately uses the same [_.tasks.<name>] namespace supported
+# by normal mise config files, while remaining arbitrary TOML for our catalog.
+
+[_.tasks."omarchy:commands"]
+icon = "desktop"
+risk = "low"
+enabled = true
+number = 71
+tags = ["omarchy", "commands"]
+category = "omarchy"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for omarchy:commands"
+
+[_.tasks."omarchy:commands:json"]
+icon = "desktop"
+risk = "low"
+enabled = true
+number = 72
+tags = ["omarchy", "commands", "json"]
+category = "omarchy"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for omarchy:commands:json"
+
+[_.tasks."omarchy:debug"]
+icon = "desktop"
+risk = "low"
+enabled = true
+number = 73
+tags = ["omarchy", "debug"]
+category = "omarchy"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for omarchy:debug"
+
+[_.tasks."omarchy:update"]
+icon = "desktop"
+risk = "medium"
+enabled = true
+number = 74
+tags = ["omarchy", "update"]
+category = "omarchy"
+destructive = false
+requires_sudo = false
+interactive = true
+anything_you_want = "custom metadata for omarchy:update"
+
+[_.tasks."omarchy:theme:list"]
+icon = "desktop"
+risk = "low"
+enabled = true
+number = 75
+tags = ["omarchy", "theme", "list"]
+category = "omarchy"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for omarchy:theme:list"
+
+[_.tasks."omarchy:font:list"]
+icon = "desktop"
+risk = "low"
+enabled = true
+number = 76
+tags = ["omarchy", "font", "list"]
+category = "omarchy"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for omarchy:font:list"

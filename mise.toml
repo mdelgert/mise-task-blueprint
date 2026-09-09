@@ -1,0 +1,23 @@
+min_version = "2026.8.0"
+
+[task_config]
+includes = ["tasks"]
+excludes = ["tasks/**/*.meta.toml"]
+
+[env]
+MISE_BLUEPRINT = "1"
+
+# Exact custom metadata pattern.
+# Top-level "_" is an arbitrary-data namespace in normal mise config files.
+[tasks.hello]
+description = "Simple task demonstrating native task config plus arbitrary custom metadata"
+run = "echo hello"
+
+[_.tasks.hello]
+icon = "hand"
+risk = "low"
+anything_you_want = "test"
+enabled = true
+number = 123
+tags = ["example", "test"]
+category = "example"

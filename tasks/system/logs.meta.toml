@@ -1,0 +1,64 @@
+# Custom metadata sidecar.
+# This file is excluded from mise task discovery by task_config.excludes.
+# It deliberately uses the same [_.tasks.<name>] namespace supported
+# by normal mise config files, while remaining arbitrary TOML for our catalog.
+
+[_.tasks."system:logs:boot"]
+icon = "computer"
+risk = "low"
+enabled = true
+number = 87
+tags = ["system", "logs", "boot"]
+category = "system"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for system:logs:boot"
+
+[_.tasks."system:logs:boot-errors"]
+icon = "computer"
+risk = "low"
+enabled = true
+number = 88
+tags = ["system", "logs", "boot-errors"]
+category = "system"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for system:logs:boot-errors"
+
+[_.tasks."system:logs:kernel"]
+icon = "computer"
+risk = "low"
+enabled = true
+number = 89
+tags = ["system", "logs", "kernel"]
+category = "system"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for system:logs:kernel"
+
+[_.tasks."system:logs:unit"]
+icon = "computer"
+risk = "low"
+enabled = true
+number = 90
+tags = ["system", "logs", "unit"]
+category = "system"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for system:logs:unit"
+
+[_.tasks."system:logs:follow"]
+icon = "computer"
+risk = "low"
+enabled = true
+number = 91
+tags = ["system", "logs", "follow"]
+category = "system"
+destructive = false
+requires_sudo = false
+interactive = true
+anything_you_want = "custom metadata for system:logs:follow"
