@@ -158,3 +158,51 @@ destructive = true
 requires_sudo = false
 interactive = false
 anything_you_want = "custom metadata for docker:compose:demo:down"
+
+[_.tasks."docker:compose:ubuntu:enter"]
+icon = "container"
+risk = "medium"
+enabled = true
+number = 112
+tags = ["docker", "compose", "ubuntu", "enter"]
+category = "docker"
+destructive = false
+requires_sudo = false
+interactive = true
+anything_you_want = "custom metadata for docker:compose:ubuntu:enter; pulls ubuntu:latest on first run"
+
+[_.tasks."docker:compose:ubuntu:down"]
+icon = "container"
+risk = "medium"
+enabled = true
+number = 113
+tags = ["docker", "compose", "ubuntu", "down"]
+category = "docker"
+destructive = true
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for docker:compose:ubuntu:down"
+
+[_.tasks."docker:compose:debian:enter"]
+icon = "container"
+risk = "medium"
+enabled = true
+number = 114
+tags = ["docker", "compose", "debian", "enter"]
+category = "docker"
+destructive = false
+requires_sudo = false
+interactive = true
+anything_you_want = "custom metadata for docker:compose:debian:enter; pulls debian:latest on first run"
+
+[_.tasks."docker:compose:debian:down"]
+icon = "container"
+risk = "medium"
+enabled = true
+number = 115
+tags = ["docker", "compose", "debian", "down"]
+category = "docker"
+destructive = true
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for docker:compose:debian:down"
