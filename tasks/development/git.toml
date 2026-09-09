@@ -17,3 +17,13 @@ run = "git branch -a -vv"
 description = "Show Git remotes"
 dir = "{{cwd}}"
 run = "git remote -v"
+
+["development:git:tag"]
+description = "Create and push a Git tag"
+dir = "{{cwd}}"
+file = "scripts/bash/git-tag.sh"
+
+["development:git:tags:all"]
+description = "List all Git tags including annotated and lightweight tags"
+dir = "{{cwd}}"
+run = "git tag -l"

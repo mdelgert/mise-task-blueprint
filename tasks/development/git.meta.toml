@@ -50,3 +50,27 @@ destructive = false
 requires_sudo = false
 interactive = false
 anything_you_want = "custom metadata for development:git:remotes"
+
+[_.tasks."development:git:tag"]
+icon = "code"
+risk = "medium"
+enabled = true
+number = 5
+tags = ["development", "git", "tag"]
+category = "development"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for development:git:tag"
+
+[_.tasks."development:git:tags:all"]
+icon = "code"
+risk = "low"
+enabled = true
+number = 6
+tags = ["development", "git", "tags", "all"]
+category = "development"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for development:git:tags:all"
