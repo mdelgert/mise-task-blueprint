@@ -10,32 +10,17 @@ min_version = "2026.8.0"
 includes = ["tasks"]
 excludes = [
     "tasks/**/*.meta.toml"
-    ,"tasks/ai"
-    ,"tasks/dev"
-    ,"tasks/docker"
-    ,"tasks/network"
-    ,"tasks/omarchy"
-    ,"tasks/system"
+    # ,"tasks/ai"
+    # ,"tasks/dev"
+    # ,"tasks/docker"
+    # ,"tasks/network"
+    # ,"tasks/omarchy"
+    # ,"tasks/system"
     ]
 
 [env]
 MISE_BLUEPRINT = "1.0"
 # MISE_VERBOSE = 1
-
-# Exact custom metadata pattern.
-# Top-level "_" is an arbitrary-data namespace in normal mise config files.
-[tasks.hello]
-description = "Simple task demonstrating native task config plus arbitrary custom metadata"
-run = "echo hello task"
-
-[_.tasks.hello]
-icon = "hand"
-risk = "low"
-anything_you_want = "test"
-enabled = true
-number = 123
-tags = ["example", "test"]
-category = "example"
 
 # Root-level task (not under tasks/) so it sorts first in `mise tasks ls`
 # and is quick to type: `mise run by-category <category>`.
@@ -77,3 +62,18 @@ destructive = false
 requires_sudo = false
 interactive = false
 anything_you_want = "named menu instead of help because mise's built-in help subcommand shadows a task literally named help"
+
+# Exact custom metadata pattern.
+# Top-level "_" is an arbitrary-data namespace in normal mise config files.
+# [tasks.hello]
+# description = "Simple task demonstrating native task config plus arbitrary custom metadata"
+# run = "echo hello task"
+
+# [_.tasks.hello]
+# icon = "hand"
+# risk = "low"
+# anything_you_want = "test"
+# enabled = true
+# number = 123
+# tags = ["example", "test"]
+# category = "example"
