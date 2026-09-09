@@ -11,12 +11,12 @@ docker inspect "$container"
 
 ["docker:container:logs"]
 description = "Show recent container logs; pass container name/ID and optional line count"
-file = "../../scripts/bash/docker-logs.sh"
+file = "scripts/bash/docker-logs.sh"
 
 ["docker:container:shell"]
 description = "Enter a running container using bash when present, otherwise sh"
 raw = true
-file = "../../scripts/bash/docker-shell.sh"
+file = "scripts/bash/docker-shell.sh"
 
 ["docker:ubuntu:run"]
 description = "Start a disposable interactive Ubuntu 24.04 shell and delete it on exit"

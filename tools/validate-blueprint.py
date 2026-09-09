@@ -33,7 +33,9 @@ for path in sorted((ROOT / "tasks").rglob("*.toml")):
                 errors.append(f"{path.relative_to(ROOT)} contains '_' but included task TOMLs must contain tasks only")
             task_names.add(name)
             if isinstance(cfg, dict) and "file" in cfg:
-                target = (path.parent / cfg["file"]).resolve()
+                # mise resolves `file =` in included task TOMLs relative to the
+                # project root (where mise.toml lives), not the included file's dir.
+                target = (ROOT / cfg["file"]).resolve()
                 if not target.exists():
                     errors.append(f"{name}: referenced file not found: {target}")
         print(f"OK   {path.relative_to(ROOT)}")

@@ -1,6 +1,6 @@
 ["system:pkg:install-core"]
 description = "Install baseline packages including ansible, nano, remmina, age, sops, curl, jq, Git, SSH and Docker"
-file = "../../scripts/bash/install-packages.sh"
+file = "scripts/bash/install-packages.sh"
 
 ["system:pkg:update"]
 description = "Update packages with the detected system package manager"

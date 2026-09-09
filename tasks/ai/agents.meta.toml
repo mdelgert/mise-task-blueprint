@@ -1,0 +1,38 @@
+# Custom metadata sidecar.
+# This file is excluded from mise task discovery by task_config.excludes.
+
+[_.tasks."ai:claude"]
+icon = "robot"
+risk = "high"
+enabled = true
+number = 1
+tags = ["ai", "claude", "agent"]
+category = "ai"
+destructive = false
+requires_sudo = false
+interactive = true
+anything_you_want = "custom metadata for ai:claude"
+
+[_.tasks."ai:copilot"]
+icon = "robot"
+risk = "high"
+enabled = true
+number = 2
+tags = ["ai", "copilot", "agent"]
+category = "ai"
+destructive = false
+requires_sudo = false
+interactive = true
+anything_you_want = "custom metadata for ai:copilot"
+
+[_.tasks."ai:codex"]
+icon = "robot"
+risk = "high"
+enabled = true
+number = 3
+tags = ["ai", "codex", "agent"]
+category = "ai"
+destructive = false
+requires_sudo = false
+interactive = true
+anything_you_want = "custom metadata for ai:codex"

@@ -6,7 +6,7 @@ run = "python --version"
 ["development:python:hello"]
 description = "Run the Python metadata example using a mise-managed Python runtime"
 tools = { python = "3.14" }
-file = "../../scripts/python/task_metadata.py"
+file = "scripts/python/task_metadata.py"
 
 ["development:node:version"]
 description = "Run a mise-managed Node runtime and print its version"
@@ -16,29 +16,29 @@ run = "node --version"
 ["development:node:hello"]
 description = "Run the Node metadata example using a mise-managed Node runtime"
 tools = { node = "24" }
-file = "../../scripts/node/hello.mjs"
+file = "scripts/node/hello.mjs"
 
 ["development:metadata:bash"]
 description = "Return useful mise/task/project metadata as JSON from Bash"
 tools = { jq = "latest" }
-file = "../../scripts/bash/task-metadata.sh"
+file = "scripts/bash/task-metadata.sh"
 
 ["development:metadata:python"]
 description = "Return useful mise/task/project metadata as JSON from Python"
 tools = { python = "3.14" }
-file = "../../scripts/python/task_metadata.py"
+file = "scripts/python/task_metadata.py"
 
 ["development:metadata:all:bash"]
 description = "Return all arbitrary [_.tasks.*] metadata as JSON through a Bash wrapper"
 tools = { python = "3.14" }
-file = "../../scripts/bash/catalog-metadata.sh"
+file = "scripts/bash/catalog-metadata.sh"
 
 ["development:metadata:all:python"]
 description = "Return all arbitrary [_.tasks.*] metadata as JSON directly from Python"
 tools = { python = "3.14" }
-file = "../../scripts/python/catalog_metadata.py"
+file = "scripts/python/catalog_metadata.py"
 
 ["development:catalog:json"]
 description = "Merge mise tasks ls --json with arbitrary [_.tasks.*] metadata"
 tools = { python = "3.14" }
-file = "../../scripts/python/catalog_json.py"
+file = "scripts/python/catalog_json.py"
