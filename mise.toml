@@ -2,8 +2,10 @@
 min_version = "2026.8.0"
 
 [settings]
-# Record resolved tool versions in mise.lock so `latest` in a task's `tools`
-# cannot silently drift between machines or over time.
+# Records resolved versions of the root [tools] table below into mise.lock.
+# Note this does NOT cover task-scoped `tools = { ... }`, which never reach the
+# lockfile -- those are pinned directly in the task instead, and
+# tools/validate-blueprint.py rejects "latest" there.
 lockfile = true
 
 # Tools configuration for the project

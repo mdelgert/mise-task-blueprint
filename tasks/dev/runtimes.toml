@@ -14,9 +14,9 @@ tools = { node = "24" }
 run = "node --version"
 
 ["dev:node:hello"]
-description = "Run the Node metadata example using a mise-managed Node runtime"
+description = "Run the hello-node.mjs sample script on a mise-managed Node runtime"
 tools = { node = "24" }
-file = "scripts/node/hello.mjs"
+file = "scripts/node/hello-node.mjs"
 
 ["dev:metadata:bash"]
 description = "Return useful mise/task/project metadata as JSON from Bash"
@@ -27,6 +27,11 @@ file = "scripts/bash/task-metadata.sh"
 description = "Return useful mise/task/project metadata as JSON from Python"
 tools = { python = "3.14" }
 file = "scripts/python/task_metadata.py"
+
+["dev:metadata:node"]
+description = "Return useful mise/task/project metadata as JSON from Node"
+tools = { node = "24" }
+file = "scripts/node/task-metadata.mjs"
 
 ["dev:metadata:all:bash"]
 description = "Return all arbitrary [_.tasks.*] metadata as JSON through a Bash wrapper"

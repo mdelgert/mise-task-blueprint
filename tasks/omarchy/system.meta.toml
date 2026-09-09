@@ -29,18 +29,6 @@ requires_sudo = false
 interactive = false
 cwd_scope = "project"
 
-[_.tasks."omarchy:debug"]
-icon = "desktop"
-risk = "low"
-enabled = true
-tags = ["omarchy", "debug"]
-category = "omarchy"
-destructive = false
-requires_confirm = false
-requires_sudo = false
-interactive = false
-cwd_scope = "project"
-
 [_.tasks."omarchy:update"]
 icon = "desktop"
 risk = "medium"

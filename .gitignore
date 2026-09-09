@@ -42,3 +42,9 @@ temp/
 *~
 .DS_Store
 Thumbs.db
+
+# Artifacts produced by tasks in this repo.
+# dev:sops:demo writes an age *private identity* into the caller's directory;
+# the script warns but nothing else stops it being committed.
+.mise-sops-demo/
+*.age

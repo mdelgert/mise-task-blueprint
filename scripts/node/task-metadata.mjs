@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const payload = {
   implementation: "node",
   nodeVersion: process.version,

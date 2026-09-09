@@ -112,3 +112,15 @@ requires_confirm = false
 requires_sudo = false
 interactive = false
 cwd_scope = "project"
+
+[_.tasks."dev:metadata:node"]
+icon = "code"
+risk = "low"
+enabled = true
+tags = ["dev", "metadata", "node"]
+category = "dev"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"

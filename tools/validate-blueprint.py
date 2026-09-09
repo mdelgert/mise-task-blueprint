@@ -169,6 +169,15 @@ for name in sorted(tasks):
         if not script.exists():
             err(f"{name} ({where}): referenced file not found: {cfg['file']}")
             script = None
+        else:
+            # mise execs a `file =` target directly, so without a shebang the
+            # kernel falls back to sh and a .py/.mjs script dies on its first
+            # line. `tools = { node = ... }` does not save it.
+            if not script.read_text().startswith("#!"):
+                err(f"{name} ({where}): {cfg['file']} has no shebang; mise execs "
+                    f"`file =` targets directly, so it will be run by sh")
+            if not script.stat().st_mode & 0o111:
+                err(f"{name} ({where}): {cfg['file']} is not executable")
 
     # `lockfile = true` only records tools from the root [tools] table, not
     # task-scoped ones, so "latest" here is genuinely unpinned and will drift.

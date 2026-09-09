@@ -6,3 +6,12 @@ includes = [
   "{{env.HOME}}/.config/mise/tasks",
   "{{env.HOME}}/Source/private/mise-task-blueprint/tasks",
 ]
+
+# REQUIRED. Without this mise tries to load every *.meta.toml as a task file and
+# fails with `unknown field \`tasks\``, loading ZERO tasks.
+#
+# A bare "**/*.meta.toml" does NOT work here -- the pattern must be fully
+# qualified against the same root as the include above.
+excludes = [
+  "{{env.HOME}}/Source/private/mise-task-blueprint/tasks/**/*.meta.toml",
+]

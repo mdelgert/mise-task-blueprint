@@ -259,6 +259,7 @@ mise dev:node:hello
 
 mise dev:metadata:bash
 mise dev:metadata:python
+mise dev:metadata:node
 mise dev:catalog:json
 
 mise dev:blueprint:validate
@@ -282,7 +283,6 @@ mise dev:sops:demo
 ```bash
 mise omarchy:commands
 mise omarchy:commands:json
-mise omarchy:debug
 mise omarchy:update
 mise omarchy:theme:list
 mise omarchy:font:list
@@ -339,26 +339,22 @@ file = "scripts/python/hello-python.py"
 
 ["dev:node:hello"]
 tools = { node = "24" }
-file = "scripts/node/hello.mjs"
+file = "scripts/node/hello-node.mjs"
 ```
 
 The host doesn't need those particular Python/Node versions installed through its OS package manager first; mise resolves/activates the requested runtime for the task.
 
 ## Metadata-returning examples
 
-Bash:
+One per runtime, all returning the same shape:
 
 ```bash
 mise dev:metadata:bash
-```
-
-Python:
-
-```bash
 mise dev:metadata:python
+mise dev:metadata:node
 ```
 
-Both output JSON containing useful execution context such as the task name, task directory, project root and original working directory.
+Each outputs JSON containing useful execution context such as the task name, task directory, project root and original working directory.
 
 ## GitHub PAT note
 
