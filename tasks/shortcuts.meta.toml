@@ -1,0 +1,62 @@
+# Custom metadata sidecar for tasks/shortcuts.toml.
+# This file is excluded from mise task discovery by task_config.excludes.
+
+[_.tasks."code:mise"]
+icon = "code"
+risk = "low"
+enabled = true
+number = 107
+tags = ["shortcut", "vscode", "editor"]
+category = "code"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for code:mise"
+
+[_.tasks."code:home"]
+icon = "code"
+risk = "low"
+enabled = true
+number = 108
+tags = ["shortcut", "vscode", "editor"]
+category = "code"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for code:home"
+
+[_.tasks."browser:google"]
+icon = "network"
+risk = "low"
+enabled = true
+number = 109
+tags = ["shortcut", "browser", "web"]
+category = "browser"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for browser:google"
+
+[_.tasks."browser:github"]
+icon = "network"
+risk = "low"
+enabled = true
+number = 110
+tags = ["shortcut", "browser", "web", "github"]
+category = "browser"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for browser:github"
+
+[_.tasks."script:meta"]
+icon = "terminal"
+risk = "low"
+enabled = true
+number = 111
+tags = ["shortcut", "script", "metadata"]
+category = "script"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for script:meta; requires jq"
