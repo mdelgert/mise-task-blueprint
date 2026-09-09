@@ -1,3 +1,0 @@
-["dev:tasks:by-category"]
-description = "List mise tasks filtered by category prefix"
-file = "scripts/bash/tasks-by-category.sh"
