@@ -1,0 +1,46 @@
+["docker:version"]
+description = "Show Docker client and server versions"
+run = "docker version"
+
+["docker:info"]
+description = "Show Docker engine information"
+run = "docker info"
+
+["docker:ps"]
+description = "List running Docker containers"
+alias = "dps"
+run = "docker ps"
+
+["docker:ps-all"]
+description = "List all Docker containers"
+run = "docker ps -a"
+
+["docker:images"]
+description = "List Docker images"
+run = "docker images"
+
+["docker:networks"]
+description = "List Docker networks"
+run = "docker network ls"
+
+["docker:volumes"]
+description = "List Docker volumes"
+run = "docker volume ls"
+
+["docker:stats"]
+description = "Show one-shot container resource usage"
+run = "docker stats --no-stream"
+
+["docker:disk-usage"]
+description = "Show Docker disk usage"
+run = "docker system df"
+
+["docker:prune"]
+description = "Remove unused Docker containers, networks and dangling images"
+confirm = "Run docker system prune? Review what Docker considers unused before continuing."
+run = "docker system prune"
+
+["docker:prune:all"]
+description = "Remove all unused Docker images plus normal unused objects"
+confirm = "Run docker system prune -a? This can remove images you expected to reuse."
+run = "docker system prune -a"

@@ -1,0 +1,23 @@
+["omarchy:hypr:monitors"]
+description = "Show Hyprland monitor information"
+run = "hyprctl monitors"
+
+["omarchy:hypr:clients"]
+description = "Show Hyprland client/window information"
+run = "hyprctl clients"
+
+["omarchy:hypr:binds"]
+description = "Show configured Hyprland key bindings"
+run = "hyprctl binds"
+
+["omarchy:hypr:devices"]
+description = "Show Hyprland input devices"
+run = "hyprctl devices"
+
+["omarchy:hypr:reload"]
+description = "Reload the Hyprland configuration"
+run = "hyprctl reload"
+
+["omarchy:screenshot"]
+description = "Take a screenshot through the Omarchy CLI"
+run = "omarchy screenshot"

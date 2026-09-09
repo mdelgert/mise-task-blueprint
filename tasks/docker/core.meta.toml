@@ -1,0 +1,136 @@
+# Custom metadata sidecar.
+# This file is excluded from mise task discovery by task_config.excludes.
+# It deliberately uses the same [_.tasks.<name>] namespace supported
+# by normal mise config files, while remaining arbitrary TOML for our catalog.
+
+[_.tasks."docker:version"]
+icon = "container"
+risk = "low"
+enabled = true
+number = 42
+tags = ["docker", "version"]
+category = "docker"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for docker:version"
+
+[_.tasks."docker:info"]
+icon = "container"
+risk = "low"
+enabled = true
+number = 43
+tags = ["docker", "info"]
+category = "docker"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for docker:info"
+
+[_.tasks."docker:ps"]
+icon = "container"
+risk = "low"
+enabled = true
+number = 44
+tags = ["docker", "ps"]
+category = "docker"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for docker:ps"
+
+[_.tasks."docker:ps-all"]
+icon = "container"
+risk = "low"
+enabled = true
+number = 45
+tags = ["docker", "ps-all"]
+category = "docker"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for docker:ps-all"
+
+[_.tasks."docker:images"]
+icon = "container"
+risk = "low"
+enabled = true
+number = 46
+tags = ["docker", "images"]
+category = "docker"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for docker:images"
+
+[_.tasks."docker:networks"]
+icon = "container"
+risk = "low"
+enabled = true
+number = 47
+tags = ["docker", "networks"]
+category = "docker"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for docker:networks"
+
+[_.tasks."docker:volumes"]
+icon = "container"
+risk = "low"
+enabled = true
+number = 48
+tags = ["docker", "volumes"]
+category = "docker"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for docker:volumes"
+
+[_.tasks."docker:stats"]
+icon = "container"
+risk = "low"
+enabled = true
+number = 49
+tags = ["docker", "stats"]
+category = "docker"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for docker:stats"
+
+[_.tasks."docker:disk-usage"]
+icon = "container"
+risk = "low"
+enabled = true
+number = 50
+tags = ["docker", "disk-usage"]
+category = "docker"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for docker:disk-usage"
+
+[_.tasks."docker:prune"]
+icon = "container"
+risk = "medium"
+enabled = true
+number = 51
+tags = ["docker", "prune"]
+category = "docker"
+destructive = true
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for docker:prune"
+
+[_.tasks."docker:prune:all"]
+icon = "container"
+risk = "high"
+enabled = true
+number = 52
+tags = ["docker", "prune", "all"]
+category = "docker"
+destructive = true
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for docker:prune:all"

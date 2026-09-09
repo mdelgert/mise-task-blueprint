@@ -1,0 +1,88 @@
+# Custom metadata sidecar.
+# This file is excluded from mise task discovery by task_config.excludes.
+# It deliberately uses the same [_.tasks.<name>] namespace supported
+# by normal mise config files, while remaining arbitrary TOML for our catalog.
+
+[_.tasks."system:info"]
+icon = "computer"
+risk = "low"
+enabled = true
+number = 80
+tags = ["system", "info"]
+category = "system"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for system:info"
+
+[_.tasks."system:uptime"]
+icon = "computer"
+risk = "low"
+enabled = true
+number = 81
+tags = ["system", "uptime"]
+category = "system"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for system:uptime"
+
+[_.tasks."system:memory"]
+icon = "computer"
+risk = "low"
+enabled = true
+number = 82
+tags = ["system", "memory"]
+category = "system"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for system:memory"
+
+[_.tasks."system:disk"]
+icon = "computer"
+risk = "low"
+enabled = true
+number = 83
+tags = ["system", "disk"]
+category = "system"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for system:disk"
+
+[_.tasks."system:block-devices"]
+icon = "computer"
+risk = "low"
+enabled = true
+number = 84
+tags = ["system", "block-devices"]
+category = "system"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for system:block-devices"
+
+[_.tasks."system:processes"]
+icon = "computer"
+risk = "low"
+enabled = true
+number = 85
+tags = ["system", "processes"]
+category = "system"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for system:processes"
+
+[_.tasks."system:environment"]
+icon = "computer"
+risk = "low"
+enabled = true
+number = 86
+tags = ["system", "environment"]
+category = "system"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for system:environment"

@@ -1,0 +1,52 @@
+# Custom metadata sidecar.
+# This file is excluded from mise task discovery by task_config.excludes.
+# It deliberately uses the same [_.tasks.<name>] namespace supported
+# by normal mise config files, while remaining arbitrary TOML for our catalog.
+
+[_.tasks."network:ping-cloudflare"]
+icon = "network"
+risk = "low"
+enabled = true
+number = 53
+tags = ["network", "ping-cloudflare"]
+category = "network"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for network:ping-cloudflare"
+
+[_.tasks."network:ping-google"]
+icon = "network"
+risk = "low"
+enabled = true
+number = 54
+tags = ["network", "ping-google"]
+category = "network"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for network:ping-google"
+
+[_.tasks."network:public-ip"]
+icon = "network"
+risk = "low"
+enabled = true
+number = 55
+tags = ["network", "public-ip"]
+category = "network"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for network:public-ip"
+
+[_.tasks."network:trace"]
+icon = "network"
+risk = "medium"
+enabled = true
+number = 56
+tags = ["network", "trace"]
+category = "network"
+destructive = false
+requires_sudo = false
+interactive = false
+anything_you_want = "custom metadata for network:trace"

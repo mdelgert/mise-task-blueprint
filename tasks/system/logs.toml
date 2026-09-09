@@ -12,7 +12,7 @@ run = "journalctl -k --no-pager -n 200"
 
 ["system:logs:unit"]
 description = "Show recent logs for a systemd unit; pass unit name and optional line count"
-file = "scripts/bash/logs-unit.sh"
+file = "../../scripts/bash/logs-unit.sh"
 
 ["system:logs:follow"]
 description = "Follow the live system journal"
