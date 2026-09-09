@@ -1,0 +1,23 @@
+# Shortcuts for opening repositories in VSCode
+["code:mise"]
+description = "VSCODE open mise repository"
+run = "code ."
+
+["code:home"]
+description = "VSCODE open home repository"
+run = "code ~/"
+
+# Shortcuts for opening websites in the default browser
+["browser:google"]
+description = "Open Google in the default browser"
+run = "xdg-open https://www.google.com"
+
+["browser:github"]
+description = "Open GitHub repo in the default browser"
+run = "xdg-open https://github.com/mdelgert/mise-task-blueprint"
+
+# Shortcuts to run common scripts
+["script:meta"]
+alias = "meta"
+description = "Run meta"
+run = "scripts/bash/read-meta.sh"
