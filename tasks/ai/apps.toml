@@ -1,0 +1,15 @@
+# Desktop AI apps, as opposed to the terminal agents in agents.toml.
+#
+# mise has no registry entry for github/app, so this uses the `github:` backend
+# directly. mise picks the release asset for the host platform, verifies the
+# GitHub artifact attestation and SLSA provenance, and installs it -- the first
+# run downloads roughly half a gigabyte.
+#
+# The `run` name is the Linux AppImage asset. Other platforms get a differently
+# named asset from the same release (.dmg/.zip on macOS, .msi/.exe on Windows),
+# so this task is Linux-only as written.
+
+["ai:copilot:app"]
+description = "Install the pinned GitHub Copilot desktop app and launch it (Linux)"
+tools = { "github:github/app" = "1.1.14" }
+run = "GitHub-Copilot.AppImage"

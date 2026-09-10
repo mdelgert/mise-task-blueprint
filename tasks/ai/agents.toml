@@ -10,8 +10,14 @@ raw = true
 confirm = "Run Claude with ALL permission prompts disabled?"
 run = "claude --dangerously-skip-permissions"
 
+# The copilot binary is a thin launcher: it downloads its real app payload into
+# ~/.cache/copilot/pkg/<platform>/<version>/ and self-updates to the newest one,
+# so a mise-pinned 1.0.74 binary otherwise still runs whatever payload is cached
+# (e.g. 1.0.83). COPILOT_AUTO_UPDATE=false makes it run its own version.
 ["ai:copilot"]
 description = "Run Copilot AI agent with full permissions"
+tools = { copilot = "1.0.74" }
+env = { COPILOT_AUTO_UPDATE = "false" }
 raw = true
 confirm = "Run Copilot with ALL tools allowed?"
 run = "copilot --allow-all-tools"

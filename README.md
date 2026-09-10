@@ -61,7 +61,8 @@ mise-task-blueprint/
 │   └── TASK-NAMING.md
 ├── tasks/
 │   ├── ai/
-│   │   └── agents.toml
+│   │   ├── agents.toml
+│   │   └── apps.toml
 │   ├── system/
 │   │   ├── info.toml
 │   │   ├── packages.toml
@@ -302,6 +303,21 @@ approval gate disabled, so each carries an explicit `confirm`:
 mise ai:claude
 mise ai:copilot
 mise ai:codex
+```
+
+`ai:copilot` also pins the CLI to a specific version and sets
+`COPILOT_AUTO_UPDATE=false`, because the `copilot` binary is only a launcher for
+a self-updating payload under `~/.cache/copilot/pkg/` and would otherwise ignore
+the pin.
+
+### AI desktop apps
+
+Installed straight from a GitHub release through mise's `github:` backend, pinned
+to a tag, and launched. Linux-only as written -- the `run` names the AppImage
+asset:
+
+```bash
+mise ai:copilot:app
 ```
 
 ## Package installation example
