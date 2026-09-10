@@ -1,0 +1,18 @@
+# Custom metadata sidecar for apps.toml.
+# Excluded from mise task discovery by task_config.excludes in mise.toml.
+#
+# Uses the same [_.tasks.<name>] namespace mise reserves for arbitrary data in
+# normal config files. Fields are validated by tools/validate-blueprint.py --
+# see docs/CUSTOM-METADATA.md for the schema.
+
+[_.tasks."ai:copilot:app"]
+icon = "app-window"
+risk = "medium"
+enabled = true
+tags = ["ai", "copilot", "app", "desktop"]
+category = "ai"
+destructive = false
+requires_confirm = false
+requires_sudo = false
+interactive = false
+cwd_scope = "project"
